@@ -15,9 +15,7 @@ colors = c("#D26670", "#9FEDD7", "#FEF9C7", "#FCE181", "#EDEAE5")
 colors2 = c("#77C9D4", "#57BC90", "#015249", "#A5A5AF", "#687A8F")
 ```
 
-
-<iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1pL3zS4tqdxESe7ho-H4siIbwTdlrYWOE/page/Nyzc" frameborder="0" style="border:0" allowfullscreen></iframe>
-<br></br>
+<iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1gRGJrsWGognR2UpDB2MCBc3labsJCNuC/page/j20c" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 This document explores customers who fit the following criteria:
 
