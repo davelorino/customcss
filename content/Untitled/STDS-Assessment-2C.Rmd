@@ -118,19 +118,19 @@ My contribution to the statistical thinking community as a whole is characterise
 
 * Regular posts to the group slack channel
 
-<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack1.png"> <br></br>
-<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack2.png"> <br></br>
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack1.png" width = 50%> <br></br>
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack2.png" width = 50%> <br></br>
 
 * Meetups on campus minimum three times per week
 
-<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911631/Profile_Pic.jpg">
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911631/Profile_Pic.jpg" width = 50%>
 
 * Posts to <a href="www.davelorino.com"><b>my website</b></a> (mostly data analyses or how-to's on particular packages for R and python)
 * Extra-curricular events with fellow STDS colleagues such as Mutaz at the GovHack2018 event <a href="https://www.youtube.com/watch?v=lpPmmZWZOBs"><b>(click here to see watch our video submission)</b></a>. 
 
 * Helping other colleagues with assessments (though usually just in the form of small code snippets to solve dplyr-ish problems)
 
-<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911581/Screen_Shot_2018-10-07_at_10.23.56_pm.png">
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911581/Screen_Shot_2018-10-07_at_10.23.56_pm.png" width = 50%>
 
 * Lastly, for work I perform data analysis tasks everyday and produce user-specific applications for individuals within the business. Two such examples of these are embedded below.  
 

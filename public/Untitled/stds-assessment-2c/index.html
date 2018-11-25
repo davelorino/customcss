@@ -98,7 +98,7 @@
 <li><b>Performing Exploratory Data Analysis to support the research question.</b></li>
 </ol>
 <p>My exploratory data analysis files (Appendix Doc 2) were submitted to the team on the night before our third class of semester - this was before a research question had been formally decided upon and we were not yet sure whether we wanted to pursue within the energy domain at all, though other ideas had been talked about as well such as gas and solar power. This data analysis was a series of graphs modelling energy demand over time for each state, coupled with side-by-side graphs of price of electricity over time in RRP AUD.</p>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <p>A plot of this nature was produced for all states and we could see that there were some pretty convincing relationships - a clear inverse relationship going on there in South Australia, with RRP going up as Demand goes down. We later found other more convincing ways to explain the Demand data, thanks to the work of</p>
 <p>After it had been settled that we would continue with this research question of forecasting energy demand from the AEMO energy data, other members of the group set about wrangling different datasets (population, weather) as well as examining the distribution of the datasets to determine that our distributions were more polynomial than normal; this would later have an impact on the type of linear model that we fit to the data.</p>
 <ol start="4" style="list-style-type: decimal">
@@ -116,18 +116,18 @@
 <ul>
 <li>Regular posts to the group slack channel</li>
 </ul>
-<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack1.png"> <br></br>
-<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack2.png"> <br></br></p>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack1.png" width = 50%> <br></br>
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack2.png" width = 50%> <br></br></p>
 <ul>
 <li>Meetups on campus minimum three times per week</li>
 </ul>
-<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911631/Profile_Pic.jpg"></p>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911631/Profile_Pic.jpg" width = 50%></p>
 <ul>
 <li>Posts to <a href="www.davelorino.com"><b>my website</b></a> (mostly data analyses or how-to’s on particular packages for R and python)</li>
 <li><p>Extra-curricular events with fellow STDS colleagues such as Mutaz at the GovHack2018 event <a href="https://www.youtube.com/watch?v=lpPmmZWZOBs"><b>(click here to see watch our video submission)</b></a>.</p></li>
 <li><p>Helping other colleagues with assessments (though usually just in the form of small code snippets to solve dplyr-ish problems)</p></li>
 </ul>
-<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911581/Screen_Shot_2018-10-07_at_10.23.56_pm.png"></p>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911581/Screen_Shot_2018-10-07_at_10.23.56_pm.png" width = 50%></p>
 <ul>
 <li>Lastly, for work I perform data analysis tasks everyday and produce user-specific applications for individuals within the business. Two such examples of these are embedded below.</li>
 </ul>
@@ -234,7 +234,7 @@ write_csv(snowy_aemo, &quot;snowy_aemo.csv&quot;)</code></pre>
   geom_smooth(aes(y = sa_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = sa_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
   ggtitle(&quot;South Australia RRP vs Demand&quot;)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <pre class="r"><code>sa_rrp_plot &lt;- ggplot(sa_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = sa_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -248,7 +248,7 @@ sa_demand_plot &lt;- ggplot(sa_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;SA&quot;)
 
 grid.arrange(sa_rrp_plot + ggtitle(&quot;South Australia Energy RRP&quot;), sa_demand_plot + ggtitle(&quot;South Australia Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
 </div>
 <div id="queensland" class="section level4">
 <h4>Queensland</h4>
@@ -256,7 +256,7 @@ grid.arrange(sa_rrp_plot + ggtitle(&quot;South Australia Energy RRP&quot;), sa_d
   geom_smooth(aes(y = qld_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = qld_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
   ggtitle(&quot;Queensland RRP vs Demand&quot;)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <pre class="r"><code>qld_rrp_plot &lt;- ggplot(qld_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = qld_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -270,7 +270,7 @@ qld_demand_plot &lt;- ggplot(qld_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;QLD&quot;)
 
 grid.arrange(qld_rrp_plot + ggtitle(&quot;Queensland Energy RRP&quot;), qld_demand_plot + ggtitle(&quot;Queensland Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
 </div>
 </div>
 </div>
@@ -280,7 +280,7 @@ grid.arrange(qld_rrp_plot + ggtitle(&quot;Queensland Energy RRP&quot;), qld_dema
   geom_smooth(aes(y = nsw_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = nsw_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
   ggtitle(&quot;NSW RRP vs Demand&quot;)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>nsw_rrp_plot &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = nsw_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -294,14 +294,14 @@ nsw_demand_plot &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;NSW&quot;)
 
 grid.arrange(nsw_rrp_plot + ggtitle(&quot;NSW Energy RRP&quot;), nsw_demand_plot + ggtitle(&quot;NSW Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <div id="victoria" class="section level4">
 <h4>Victoria</h4>
 <pre class="r"><code>ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
   geom_smooth(aes(y = vic_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = vic_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
   ggtitle(&quot;Victoria RRP vs Demand&quot;)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <pre class="r"><code>vic_rrp_plot &lt;- ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = vic_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -315,7 +315,7 @@ vic_demand_plot &lt;- ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;VIC&quot;)
 
 grid.arrange(vic_rrp_plot + ggtitle(&quot;Victoria Energy RRP&quot;), vic_demand_plot + ggtitle(&quot;Victoria Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
 </div>
 <div id="tasmania" class="section level4">
 <h4>Tasmania</h4>
@@ -323,7 +323,7 @@ grid.arrange(vic_rrp_plot + ggtitle(&quot;Victoria Energy RRP&quot;), vic_demand
   geom_smooth(aes(y = tas_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = tas_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
   ggtitle(&quot;Tasmania RRP vs Demand&quot;)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>tas_rrp_plot &lt;- ggplot(tas_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = tas_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -337,14 +337,14 @@ tas_demand_plot &lt;- ggplot(tas_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;TAS&quot;)
 
 grid.arrange(tas_rrp_plot + ggtitle(&quot;Tasmania Energy RRP&quot;), tas_demand_plot + ggtitle(&quot;Tasmania Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 </div>
 <div id="snowy-mountains" class="section level4">
 <h4>Snowy Mountains</h4>
 <pre class="r"><code>ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
   geom_smooth(aes(y = snowy_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
   geom_smooth(aes(y = snowy_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) </code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <pre class="r"><code>snowy_rrp_plot &lt;- ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
     geom_smooth(aes(y = snowy_aemo_clean$RRP), se = FALSE) +
     xlab(&quot;Settlement Date&quot;) +
@@ -358,17 +358,17 @@ snowy_demand_plot &lt;- ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
   ggtitle(&quot;Snowy Mnts.&quot;)
 
 grid.arrange(snowy_rrp_plot + ggtitle(&quot;Snowy Mountains Energy RRP&quot;), snowy_demand_plot + ggtitle(&quot;Snowy Mountains Energy Demand&quot;), nrow = 1)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
 </div>
 <div id="energy-demand---all-states" class="section level4">
 <h4>Energy Demand - All States</h4>
 <pre class="r"><code>grid.arrange(sa_demand_plot, qld_demand_plot, nsw_demand_plot, vic_demand_plot, tas_demand_plot, snowy_demand_plot, nrow = 2, ncol = 3, top = textGrob(&quot;Energy Demand by State&quot;))</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="energy-rrp---all-states" class="section level4">
 <h4>Energy RRP - All States</h4>
 <pre class="r"><code>grid.arrange(sa_rrp_plot, qld_rrp_plot, nsw_rrp_plot, vic_rrp_plot, tas_rrp_plot, snowy_rrp_plot, nrow = 2, ncol = 3, top = textGrob(&quot;Energy RRP by State&quot;))</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="energy-demand---nsw-qld-sa-vic" class="section level4">
 <h4>Energy Demand - NSW, QLD, SA &amp; VIC</h4>
@@ -382,7 +382,7 @@ grid.arrange(snowy_rrp_plot + ggtitle(&quot;Snowy Mountains Energy RRP&quot;), s
   ggtitle(&quot;Energy Demand: NSW, QLD, VIC &amp; SA&quot;)
 
 nsw_qld_vic_sa_demand</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 </div>
 <div id="energy-rrp---nsw-qld-sa-vic" class="section level4">
 <h4>Energy RRP - NSW, QLD, SA &amp; VIC</h4>
@@ -396,12 +396,12 @@ nsw_qld_vic_sa_demand</code></pre>
   ggtitle(&quot;Energy RRP: NSW, QLD, VIC &amp; SA&quot;)
 
 nsw_qld_vic_sa_rrp</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 <div id="demand-and-rrp---nsw-qld-vic-sa" class="section level4">
 <h4>Demand and RRP - NSW, QLD, VIC &amp; SA</h4>
 <pre class="r"><code>grid.arrange(nsw_qld_vic_sa_demand + ggtitle(&quot;Demand&quot;), nsw_qld_vic_sa_rrp + ggtitle(&quot;RRP&quot;), ncol = 2)</code></pre>
-<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/Untitled/STDS-Assessment-2C_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="appendix-doc-3---imputing-outliers-and-fitting-linear-models" class="section level3">
 <h3>Appendix Doc 3 - Imputing Outliers and Fitting Linear Models</h3>
