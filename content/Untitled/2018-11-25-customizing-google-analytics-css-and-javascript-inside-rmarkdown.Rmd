@@ -15,9 +15,22 @@ colors = c("#D26670", "#9FEDD7", "#FEF9C7", "#FCE181", "#EDEAE5")
 colors2 = c("#77C9D4", "#57BC90", "#015249", "#A5A5AF", "#687A8F")
 ```
 
-RMarkdown is the development environment that I use for most of my reporting both at work and for making reproducible workflows. The benefits are limitless; <i>all major programming languages in one document and with the full extensibility of CSS and Javascript to communicate with the features of todays modern web.</i>
+RMarkdown is an excellent reporting tool by Yihui Xie at RStudio. I use it for a lot of my reporting at work because of its ability to execute <i>all major programming languages in one document with the full extensibility of CSS and Javascript.</i> Pretty impressive. 
 
-This post will explore how we can extend RMarkdown even further, by porting in a report from Google Data Studio, as well as using custom CSS and Javascript to give you more control over of style and reactivity within Rmd documents. Lastly, the whole thing is packaged up and rendered to html for deployment to a blogdown website.  
+This post will explore how we can extend RMarkdown even further with 
+  
+  * Google Data Studio
+  * Custom CSS and 
+  * Javascript 
+
+to give you more control over of style and reactivity within Rmd documents. 
+
+As a motivating example as to how much control you have over the design elements of your page, this is what the css stylesheet for this page looked like before I made any edits to it:
+
+<center>
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1543148071/Screen_Shot_2018-11-25_at_11.11.47_pm.png" width = 50%>
+</center>
+... pretty basic. Let's start adding some flare. 
 
   <b>1. Google Data Studio</b> 
 

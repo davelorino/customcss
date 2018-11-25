@@ -17,7 +17,7 @@
       <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/untitled/customizing-google-analytics-css-and-javascript-inside-rmarkdown/</guid>
-      <description>RMarkdown is the development environment that I use for most of my reporting both at work and for making reproducible workflows. The benefits are limitless; all major programming languages in one document and with the full extensibility of CSS and Javascript to communicate with the features of todays modern web.</description>
+      <description>RMarkdown is an excellent reporting tool by Yihui Xie at RStudio. I use it for a lot of my reporting at work because of its ability to execute all major programming languages in one document with the full extensibility of CSS and Javascript.</description>
     </item>
     
     <item>
