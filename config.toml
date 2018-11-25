@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 title = "Davide Lorino"
 theme = "hugo-lithium"
-googleAnalytics = ""
+googleAnalytics = "UA-123002746-1"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
