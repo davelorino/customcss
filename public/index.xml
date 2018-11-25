@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Davide Lorino</title>
+    <link>/</link>
+    <description>Recent content on Davide Lorino</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 25 Nov 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Customizing Google Analytics, CSS and Javascript inside RMarkdown</title>
+      <link>/untitled/customizing-google-analytics-css-and-javascript-inside-rmarkdown/</link>
+      <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/customizing-google-analytics-css-and-javascript-inside-rmarkdown/</guid>
+      <description>This document explores customers who fit the following criteria:
+ came to our website as organic searchers
+ clicked on a banner heading at any point during their browse
+ placed an order within the same session</description>
+    </item>
+    
+    <item>
+      <title>ARIMA Timeseries Forecasting in R </title>
+      <link>/untitled/arima-timeseries-forecasting-in-r/</link>
+      <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/arima-timeseries-forecasting-in-r/</guid>
+      <description>Auto Regressive Integration of Moving Averages   This report aims to explain the desired outcome of the ‘Auto Regressive Integration of Moving Averages’ (ARIMA) model in it’s application towards forecasting energy demand in Australia, as well as the assumptions and limitations that are present through the use of an ARIMA model. ARIMA models are a widely used industry standard for timeseries forecasting.
+Definition  A timeseries which needs to be differenced to be made stationary is an “integrated” (I) series.</description>
+    </item>
+    
+    <item>
+      <title>STDS Assessment 2C</title>
+      <link>/untitled/stds-assessment-2c/</link>
+      <pubDate>Sun, 07 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/stds-assessment-2c/</guid>
+      <description>Project Review and Contribution to Community   ‘High Voltage’ Group Dynamics   Paul Robertson Edward Truong Mutaz Abu Ghazzaleh Justin White Davide Lorino (myself)  Working with these four individuals in the process of delivering Assessment 2 (and a variety of side projects - see the ‘Apps’ subheading of ‘Contribution to Statistical Thinking Community’ below) was an immense pleasure. Having previously worked with Edward and Paul in Data Science for Innovation and taken Data Algorithms and Meaning with Mutaz (having had many conversations about statistical concepts together) and also working with somebody I hadn’t met yet - Justin White - I was really excited to take on this project together.</description>
+    </item>
+    
+    <item>
+      <title>STDS Reflection - Scraping the Australian Energy Market Operator &#39;Energy Demand&#39; Data</title>
+      <link>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</link>
+      <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</guid>
+      <description>In this post we will examine how to download all of the data energy demand data available from the Australian Energy Market Operator by using their aemo package in R. This data is displayed via a graphic on their page, however the graphic only allows for a specific timeframe of 5 days to be viewed at a time, and only one state at a time too. Thankfully the aemo package will let us download all of it!</description>
+    </item>
+    
+    <item>
+      <title>Automate the Browser with Selenium and Python</title>
+      <link>/untitled/automate-the-browser-with-selenium-and-python/</link>
+      <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/automate-the-browser-with-selenium-and-python/</guid>
+      <description>Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the .</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with tidytext, ggplot2 and Quanteda </title>
+      <link>/untitled/text-analysis-with-tidytext-ggplot2-and-quanteda/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/text-analysis-with-tidytext-ggplot2-and-quanteda/</guid>
+      <description>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
+Libraries There are a fair few libraries to load for text analysis;
+library(stringr) library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 3.0.0 ✔ readr 1.</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with visNetwork</title>
+      <link>/untitled/text-analysis-with-visnetwork/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/text-analysis-with-visnetwork/</guid>
+      <description>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.</description>
+    </item>
+    
+    <item>
+      <title>Maps with R and Leaflet</title>
+      <link>/untitled/2018-07-24-maps-with-r-and-leaflet/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/2018-07-24-maps-with-r-and-leaflet/</guid>
+      <description>Interactive Maps in R with leaflet 2018-07-24
+Plotting interactive maps is easy with the leaflet package in R. In this short guide we’ll use the Launceston Public Seating dataset to plot markers, add pop-ups and freeze the map on an area of interest. Let’s get started.
+Load the leaflet and dplyr libraries:
+library(leaflet) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union Now lets look at our dataset.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Davide Lorino is a Data Analyst at Laithwaite&amp;rsquo;s Wine People and postgraduate Data Science student at the University of Technology, Sydney.
+This website hosts a variety of projects leveraging R, Python, SQL, SAS, HTML, CSS and Javascript.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/untitled/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/untitled/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+ </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/untitled/2018-08/2018-07-28-text-analysis-using-r-australian-pm-inauguration-speeches-data/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/2018-08/2018-07-28-text-analysis-using-r-australian-pm-inauguration-speeches-data/</guid>
+      <description>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/untitled/hchart1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/hchart1/</guid>
+      <description>widgetframe (function() { // If window.HTMLWidgets is already defined, then use it; otherwise create a // new object. This allows preceding code to set options that affect the // initialization process (though none currently exist). window.HTMLWidgets = window.HTMLWidgets || {}; // See if we&#39;re running in a viewer pane. If not, we&#39;re in a web browser. var viewerMode = window.HTMLWidgets.viewerMode = /\bviewer_pane=1\b/.test(window.location); // See if we&#39;re running in Shiny mode.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/untitled/hchart2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/hchart2/</guid>
+      <description>highchart (function() { // If window.HTMLWidgets is already defined, then use it; otherwise create a // new object. This allows preceding code to set options that affect the // initialization process (though none currently exist). window.HTMLWidgets = window.HTMLWidgets || {}; // See if we&#39;re running in a viewer pane. If not, we&#39;re in a web browser. var viewerMode = window.HTMLWidgets.viewerMode = /\bviewer_pane=1\b/.test(window.location); // See if we&#39;re running in Shiny mode.</description>
+    </item>
+    
+  </channel>
+</rss>

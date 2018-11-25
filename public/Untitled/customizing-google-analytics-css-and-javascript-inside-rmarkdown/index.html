@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.45" />
+
+
+<title>Customizing Google Analytics, CSS and Javascript inside RMarkdown - Davide Lorino</title>
+<meta property="og:title" content="Customizing Google Analytics, CSS and Javascript inside RMarkdown - Davide Lorino">
+
+
+
+  
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/blackcat.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">about</a></li>
+    
+    <li><a href="davelorino@gmail.com">contact</a></li>
+    
+    <li><a href="https://github.com/davelorino">github</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+
+    <h1 class="article-title">Customizing Google Analytics, CSS and Javascript inside RMarkdown</h1>
+
+    
+
+    <div class="article-content">
+      <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/proj4js/proj4.js"></script>
+<link href="/rmarkdown-libs/highcharts/css/motion.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/highcharts/highcharts.js"></script>
+<script src="/rmarkdown-libs/highcharts/highcharts-3d.js"></script>
+<script src="/rmarkdown-libs/highcharts/highcharts-more.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/stock.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/heatmap.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/treemap.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/annotations.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/boost.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/data.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/drag-panes.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/drilldown.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/funnel.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/item-series.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/offline-exporting.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/overlapping-datalabels.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/parallel-coordinates.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/sankey.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/solid-gauge.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/streamgraph.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/sunburst.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/vector.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/wordcloud.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/xrange.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/exporting.js"></script>
+<script src="/rmarkdown-libs/highcharts/modules/export-data.js"></script>
+<script src="/rmarkdown-libs/highcharts/maps/modules/map.js"></script>
+<script src="/rmarkdown-libs/highcharts/plugins/grouped-categories.js"></script>
+<script src="/rmarkdown-libs/highcharts/plugins/motion.js"></script>
+<script src="/rmarkdown-libs/highcharts/plugins/multicolor_series.js"></script>
+<script src="/rmarkdown-libs/highcharts/custom/reset.js"></script>
+<script src="/rmarkdown-libs/highcharts/custom/symbols-extra.js"></script>
+<script src="/rmarkdown-libs/highcharts/custom/text-symbols.js"></script>
+<script src="/rmarkdown-libs/highchart-binding/highchart.js"></script>
+  <link rel="stylesheet" href="style1.css" type="text/css" />
+
+
+<iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1pL3zS4tqdxESe7ho-H4siIbwTdlrYWOE/page/Nyzc" frameborder="0" style="border:0" allowfullscreen>
+</iframe>
+<p><br></br></p>
+<p>This document explores customers who fit the following criteria:</p>
+<ul>
+<li><p>came to our website as organic searchers</p></li>
+<li><p>clicked on a banner heading at any point during their browse</p></li>
+<li><p>placed an order within the same session</p></li>
+</ul>
+<p>What we can see is that a significant proportion of these customers who began as organic searches, have been re-defined as having a sales activity other than ‘Web’ (Main Mailing, Recriuitment etc) as a result of having clicked the banner heading.</p>
+<p><br></br>
+<div id="htmlwidget-1" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"hc_opts":{"title":{"text":"<span style =\"color:#f9f1f1\">Organic Searchers Final GMS Segment After Banner Click 2017<\/span>","useHTML":true},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"pie":{"dataLabels":{"color":"#f9f1f1"},"size":"250"}},"chart":{"type":"pie","style":{"fontFamily":"courier new"}},"series":[{"data":[{"name":"EM","y":3.55},{"name":"MM","y":0.59},{"name":"RECR","y":50.89},{"name":"RT","y":18.05},{"name":"UP","y":0.3},{"name":"WEB","y":26.63}],"name":"Orders per Channel %"}],"colors":["#77C9D4","#57BC90","#015249","#A5A5AF","#687A8F"]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"courier+new","debug":false},"evals":[],"jsHooks":[]}</script>
+<br></br>
+<div id="htmlwidget-2" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"hc_opts":{"title":{"text":"<span style =\"color:#f9f1f1\">Organic Searchers Final GMS Segment After Banner Click 2018<\/span>","useHTML":true},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"pie":{"dataLabels":{"color":"#f9f1f1"},"size":"250"}},"chart":{"type":"pie","style":{"fontFamily":"courier new"}},"series":[{"data":[{"name":"EM","y":0.24},{"name":"MM","y":28.05},{"name":"RECR","y":55.12},{"name":"WEB","y":16.59}],"name":"Orders per Channel %"}],"colors":["#77C9D4","#57BC90","#015249","#A5A5AF","#687A8F"]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"courier+new","debug":false},"evals":[],"jsHooks":[]}</script></p>
+<p><br></br>
+<div id="htmlwidget-3" style="width:100%;height:500px;" class="highchart html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"hc_opts":{"title":{"text":"<span style =\"color:#f9f1f1\">Revenue per Channel<\/span>","useHTML":true,"itemStyle":{"fontFamily":"courier new"}},"yAxis":{"title":{"text":"Revenue"},"type":"linear","labels":{"style":{"color":"#f9f1f1","fontFamily":"courier new"}}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":true},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"name":2017,"data":[{"dwinf_salesactivity":"EM","Year":2017,"Revenue":2958.2,"y":2958.2,"name":"EM"},{"dwinf_salesactivity":"MM","Year":2017,"Revenue":686.74,"y":686.74,"name":"MM"},{"dwinf_salesactivity":"RECR","Year":2017,"Revenue":23687.89,"y":23687.89,"name":"RECR"},{"dwinf_salesactivity":"RT","Year":2017,"Revenue":16188.04,"y":16188.04,"name":"RT"},{"dwinf_salesactivity":"UP","Year":2017,"Revenue":129.87,"y":129.87,"name":"UP"},{"dwinf_salesactivity":"WEB","Year":2017,"Revenue":24237.37,"y":24237.37,"name":"WEB"}],"type":"column"},{"name":2018,"data":[{"dwinf_salesactivity":"EM","Year":2018,"Revenue":237.87,"y":237.87,"name":"EM"},{"dwinf_salesactivity":"MM","Year":2018,"Revenue":30974.79,"y":30974.79,"name":"MM"},{"dwinf_salesactivity":"RECR","Year":2018,"Revenue":30489.14,"y":30489.14,"name":"RECR"},{"dwinf_salesactivity":"WEB","Year":2018,"Revenue":19155.04,"y":19155.04,"name":"WEB"}],"type":"column"}],"xAxis":{"type":"category","title":{"text":"dwinf_salesactivity"},"labels":{"style":{"color":"#f9f1f1","fontFamily":"courier new"}}},"legend":{"useHTML":true,"itemStyle":{"color":"#f9f1f1","fontWeight":"bold","fontFamily":"courier new"}},"chart":{"style":{"fontFamily":"courier new"}},"colors":["#77C9D4","#57BC90","#015249","#A5A5AF","#687A8F"]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"courier+new","debug":false},"evals":[],"jsHooks":[]}</script>
+<br></br></p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

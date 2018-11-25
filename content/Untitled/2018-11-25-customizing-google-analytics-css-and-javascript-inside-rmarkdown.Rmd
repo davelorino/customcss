@@ -1,0 +1,158 @@
+---
+title: Customizing Google Analytics, CSS and Javascript inside RMarkdown
+author: Davide Lorino
+date: '2018-11-25'
+slug: customizing-google-analytics-css-and-javascript-inside-rmarkdown
+categories: []
+tags: []
+css: style1.css
+---
+
+```{r echo=FALSE, message = FALSE}
+library(tidyverse)
+library(highcharter)
+colors = c("#D26670", "#9FEDD7", "#FEF9C7", "#FCE181", "#EDEAE5")
+colors2 = c("#77C9D4", "#57BC90", "#015249", "#A5A5AF", "#687A8F")
+```
+
+
+<iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1pL3zS4tqdxESe7ho-H4siIbwTdlrYWOE/page/Nyzc" frameborder="0" style="border:0" allowfullscreen></iframe>
+<br></br>
+
+This document explores customers who fit the following criteria:
+
+  * came to our website as organic searchers
+    
+  * clicked on a banner heading at any point during their browse
+    
+  * placed an order within the same session
+
+What we can see is that a significant proportion of these customers who began as organic searches, have been re-defined as having a sales activity other than 'Web' (Main Mailing, Recriuitment etc) as a result of having clicked the banner heading.
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(highcharter)
+library(stringr)
+library(lubridate)
+```
+
+```{r echo = FALSE, message = FALSE, eval = FALSE}
+
+ga_organic_bc <- read_csv("OrganicBannerClick.csv")
+
+ga_organic_bc$Date <- as.Date(ga_organic_bc$Date, "%d/%m/%Y")
+
+ga_organic_bc$`Product Revenue` <- str_replace(ga_organic_bc$`Product Revenue`, "$", "")
+
+```
+
+
+```{r echo = FALSE, message = FALSE}
+
+final_ga <- read_csv("Final GA Orders.csv")
+final_ga$Date <- as.Date(final_ga$Date, "%d/%m/%Y")
+
+final_ga_2017 <- final_ga %>%
+    filter(Date >= "2017/01/01" & Date < "2018/01/01")
+
+final_ga_2018 <- final_ga %>%
+    filter(Date >= "2018/01/01")
+
+final_ga_2017_dwinf_counts <- final_ga_2017 %>%
+    group_by(dwinf_salesactivity) %>%
+    summarize(n = n()) %>%
+    mutate(Percentage = n / sum(n) * 100)
+
+final_ga$Year <- year(final_ga$Date)
+
+final_ga_2017_dwinf_counts$Percentage <- round(final_ga_2017_dwinf_counts$Percentage, 2)
+
+final_ga_2017_dwinf_revenue <- final_ga_2017 %>%
+    group_by(dwinf_salesactivity) %>%
+    summarize(Revenue = sum(totaldiscount)) %>%
+    mutate(Revenue_Percentage = Revenue/sum(Revenue) * 100)
+
+final_ga_2017_dwinf_revenue$Revenue_Percentage <- round(final_ga_2017_dwinf_revenue$Revenue_Percentage, 2)
+
+```
+
+```{r echo = FALSE, message = FALSE, warning=FALSE}
+
+
+final_ga_2018_dwinf_counts <- final_ga_2018 %>%
+    group_by(dwinf_salesactivity) %>%
+    summarize(n = n()) %>%
+    mutate(Percentage = n / sum(n) * 100)
+
+final_ga_2018_dwinf_counts$Percentage <- round(final_ga_2018_dwinf_counts$Percentage, 2)
+
+final_ga_2018_dwinf_revenue <- final_ga_2018 %>%
+    group_by(dwinf_salesactivity) %>%
+    summarize(Revenue = sum(totaldiscount)) %>%
+    mutate(Revenue_Percentage = Revenue/sum(Revenue) * 100)
+
+final_ga_2018_dwinf_revenue$Revenue_Percentage <- round(final_ga_2018_dwinf_revenue$Revenue_Percentage, 2)
+
+final_ga_revenue <- final_ga %>%
+    group_by(dwinf_salesactivity, Year) %>%
+    summarize(Revenue = sum(totaldiscount)) 
+
+final_ga_revenue_percent <- final_ga_revenue %>%
+    group_by(Year) %>%
+    mutate("Revenue Percentage" = Revenue/sum(Revenue) * 100) 
+
+final_ga_revenue_percent$`Revenue Percentage` <- round(final_ga_revenue_percent$`Revenue Percentage`, 2)
+```
+<br></br>
+```{r, echo = FALSE, warning = FALSE}
+highchart() %>% 
+  hc_chart(type = "pie", style = list(fontFamily = "courier new")) %>% 
+  hc_add_series_labels_values(labels = final_ga_2017_dwinf_counts$dwinf_salesactivity, values = final_ga_2017_dwinf_counts$Percentage, name = "Orders per Channel %") %>% hc_title(text = "<span style =\"color:#f9f1f1\">Organic Searchers Final GMS Segment After Banner Click 2017</span>", useHTML = TRUE) %>% hc_plotOptions(pie = list (dataLabels = list(color = "#f9f1f1"), size = "250")) %>% hc_colors(colors2)
+```
+<br></br>
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+highchart() %>% 
+  hc_chart(type = "pie", style = list(fontFamily = "courier new")) %>% 
+  hc_add_series_labels_values(labels = final_ga_2018_dwinf_counts$dwinf_salesactivity, values = final_ga_2018_dwinf_counts$Percentage, name = "Orders per Channel %") %>% hc_title(text = "<span style =\"color:#f9f1f1\">Organic Searchers Final GMS Segment After Banner Click 2018</span>", useHTML = TRUE) %>% hc_plotOptions(pie = list (dataLabels = list(color = "#f9f1f1"), size = "250")) %>% hc_colors(colors2)
+
+```
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = FALSE}
+hchart(final_ga_revenue, "column", hcaes(x = dwinf_salesactivity, y = Revenue, group = Year)) %>%
+    hc_title(text = "<span style =\"color:#FFFFFF\">Revenue per Channel (in Dollars)</span>", useHTML = TRUE) %>% hc_legend(useHTML = TRUE, itemStyle = list(color = "#FFFFFF", fontWeight = "bold")) %>%
+    hc_xAxis(labels = list(style = list(color = "white"))) %>%
+    hc_yAxis(labels = list(style = list(color = "white")))
+```
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = FALSE}
+hchart(final_ga_revenue_percent, "column", hcaes(x = dwinf_salesactivity, y = `Revenue Percentage`, group = Year)) %>%
+    hc_title(text = "<span style =\"color:#FFFFFF\">Revenue per Channel (% of Yearly Revenue)</span>", useHTML = TRUE) %>% hc_legend(useHTML = TRUE, itemStyle = list(color = "#FFFFFF", fontWeight = "bold")) %>%
+    hc_xAxis(labels = list(style = list(color = "white"))) %>%
+    hc_yAxis(labels = list(style = list(color = "white")))
+```
+<br></br>
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+
+hchart(final_ga_revenue, "column", hcaes(x = dwinf_salesactivity, y = Revenue, group = Year)) %>%
+    hc_title(text = "<span style =\"color:#f9f1f1\">Revenue per Channel</span>", useHTML = TRUE, itemStyle = list(fontFamily = "courier new")) %>% hc_legend(useHTML = TRUE, itemStyle = list(color = "#f9f1f1", fontWeight = "bold", fontFamily = "courier new")) %>%
+    hc_xAxis(labels = list(style = list(color = "#f9f1f1", fontFamily = "courier new"))) %>%
+    hc_yAxis(labels = list(style = list(color = "#f9f1f1", fontFamily = "courier new"))) %>%
+  hc_chart(style = list(fontFamily = "courier new")) %>% hc_colors(colors2)
+  
+```
+<br></br>
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = FALSE}
+
+hchart(final_ga_2017_dwinf_revenue, "column", hcaes(x = dwinf_salesactivity, y = Revenue)) %>%
+    hc_title(text = "<span style =\"color:#FFFFFF\">2017 Revenue per Channel</span>", useHTML = TRUE, itemStyle = list(fontFamily = "courier new")) %>% hc_legend(useHTML = TRUE, itemStyle = list(color = "#FFFFFF", fontWeight = "bold")) %>%
+    hc_xAxis(labels = list(style = list(color = "white"))) %>%
+    hc_yAxis(labels = list(style = list(color = "white")))
+```
+
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = FALSE}
+
+
+hchart(final_ga_2018_dwinf_revenue, "column", hcaes(x = dwinf_salesactivity, y = Revenue)) %>%
+    hc_title(text = "<span style =\"color:#FFFFFF\">2018 Revenue per Channel</span>", useHTML = TRUE) %>% hc_legend(useHTML = TRUE, itemStyle = list(color = "#FFFFFF", fontWeight = "bold")) %>%
+    hc_xAxis(labels = list(style = list(color = "white"))) %>%
+    hc_yAxis(labels = list(style = list(color = "white")))
+
+```

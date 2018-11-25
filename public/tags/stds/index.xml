@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stds on Davide Lorino</title>
+    <link>/tags/stds/</link>
+    <description>Recent content in Stds on Davide Lorino</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 23 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/stds/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ARIMA Timeseries Forecasting in R </title>
+      <link>/untitled/arima-timeseries-forecasting-in-r/</link>
+      <pubDate>Tue, 23 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/arima-timeseries-forecasting-in-r/</guid>
+      <description>Auto Regressive Integration of Moving Averages   This report aims to explain the desired outcome of the ‘Auto Regressive Integration of Moving Averages’ (ARIMA) model in it’s application towards forecasting energy demand in Australia, as well as the assumptions and limitations that are present through the use of an ARIMA model. ARIMA models are a widely used industry standard for timeseries forecasting.
+Definition  A timeseries which needs to be differenced to be made stationary is an “integrated” (I) series.</description>
+    </item>
+    
+    <item>
+      <title>STDS Assessment 2C</title>
+      <link>/untitled/stds-assessment-2c/</link>
+      <pubDate>Sun, 07 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/stds-assessment-2c/</guid>
+      <description>Project Review and Contribution to Community   ‘High Voltage’ Group Dynamics   Paul Robertson Edward Truong Mutaz Abu Ghazzaleh Justin White Davide Lorino (myself)  Working with these four individuals in the process of delivering Assessment 2 (and a variety of side projects - see the ‘Apps’ subheading of ‘Contribution to Statistical Thinking Community’ below) was an immense pleasure. Having previously worked with Edward and Paul in Data Science for Innovation and taken Data Algorithms and Meaning with Mutaz (having had many conversations about statistical concepts together) and also working with somebody I hadn’t met yet - Justin White - I was really excited to take on this project together.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,112 @@
+---
+title: STDS Reflection - Scraping the Australian Energy Market Operator 'Energy Demand' Data
+author: Davide Lorino
+date: '2018-10-06'
+img: "images/blog/2018-08/test11.jpg"
+slug: scraping-the-australian-energy-market-operator-energy-demand-data
+categories:
+  - R
+tags:
+  - blog
+output:
+  html_document:
+    theme: darkly
+    highlight: tango
+---
+
+In this post we will examine how to download all of the data energy demand data available from the Australian Energy Market Operator by using their aemo package in R. This data is displayed via a graphic on their page, however the graphic only allows for a specific timeframe of 5 days to be viewed at a time, and only one state at a time too. Thankfully the aemo package will let us download all of it! Let's load the necessary libraries. 
+
+```{r eval = FALSE}
+library(parsedate)
+library(aemo)
+library(tidyverse)
+library(gridExtra)
+library(plotly)
+library(caret)
+library(htmldeps)
+```
+
+The most important function we will use from the aemo package is the ```collate_aemo_data()``` function. This will start the process of downloading the data to a directory of your choice. 
+
+```{r eval = FALSE}
+collate_aemo_data(path = "~/Downloads/New Folder With Items", remove_files = FALSE)
+```
+
+Unfortunately for us, the function does this in the form of different csv files for every single day within the dataset (there are close to 500 csv files that are downloaded). There is also a ```remove files``` argument in the ```collate_aemo_data``` call, and this is because there used to be a function in the aemo package that would bind the csv files together into one csv file and then delete all of the smaller ones with ```remove files = TRUE```. Aspects of the functions dependencies have since deprecated and those things don't work anymore (the binding and deleting) so below I present a different way of binding these datasets in a tidy format.  
+
+Below we: 
+* set our working directory to where we downloaded the files
+* store a variable containing all of the file names of the csv's
+* apply the function ```read.csv()``` to all of the files in ```file_list``` 
+* bind all resulting rows with ```rbind()``` and ```Reduce()``` the result to ```all_files``` 
+
+```{r eval = FALSE}
+setwd("~/Downloads/New Folder With Items")
+
+file_list <- list.files()
+
+all_files <- Reduce(rbind, lapply(file_list, read.csv))
+```
+
+Next step - filter each state into a seperate dataframe
+
+```{r eval = FALSE}
+qld_aemo <- all_files %>%
+  filter(REGION == "QLD1")
+
+nsw_aemo <- all_files %>%
+  filter(REGION == "NSW1")
+
+vic_aemo <- all_files %>%
+  filter(REGION == "VIC1")
+
+sa_aemo <- all_files %>%
+  filter(REGION == "SA1")
+
+tas_aemo <- all_files %>%
+  filter(REGION == "TAS1")
+
+snowy_aemo <- all_files %>%
+  filter(REGION == "SNOWY1")
+```
+
+Dates are inconsistent within and among the csv files. Use the parsedate::parse_date() to make them all conform to POSIXct
+
+```{r eval = FALSE}
+vic_aemo$SETTLEMENTDATE <- parse_date(vic_aemo$SETTLEMENTDATE)
+
+qld_aemo$SETTLEMENTDATE <- parse_date(qld_aemo$SETTLEMENTDATE)
+
+sa_aemo$SETTLEMENTDATE <- parse_date(sa_aemo$SETTLEMENTDATE)
+
+nsw_aemo$SETTLEMENTDATE <- parse_date(nsw_aemo$SETTLEMENTDATE)
+
+tas_aemo$SETTLEMENTDATE <- parse_date(tas_aemo$SETTLEMENTDATE)
+
+snowy_aemo$SETTLEMENTDATE <- parse_date(snowy_aemo$SETTLEMENTDATE)
+
+## Check for NAs 
+
+sum(is.na(vic_aemo$SETTLEMENTDATE))
+
+sum(is.na(qld_aemo$SETTLEMENTDATE))
+
+sum(is.na(sa_aemo$SETTLEMENTDATE))
+
+sum(is.na(nsw_aemo$SETTLEMENTDATE))
+
+sum(is.na(snowy_aemo$SETTLEMENTDATE))
+
+sum(is.na(tas_aemo$SETTLEMENTDATE))
+```
+```{r eval = FALSE}
+setwd("~/Downloads/AEMO Clean Data")
+
+write_csv(vic_aemo, "vic_aemo.csv")
+write_csv(nsw_aemo, "nsw_aemo.csv")
+write_csv(qld_aemo, "qld_aemo.csv")
+write_csv(sa_aemo, "sa_aemo.csv")
+write_csv(tas_aemo, "tas_aemo.csv")
+write_csv(snowy_aemo, "snowy_aemo.csv")
+```
+

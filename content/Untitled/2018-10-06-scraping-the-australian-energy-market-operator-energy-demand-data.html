@@ -1,0 +1,91 @@
+---
+title: STDS Reflection - Scraping the Australian Energy Market Operator 'Energy Demand' Data
+author: Davide Lorino
+date: '2018-10-06'
+img: "images/blog/2018-08/test11.jpg"
+slug: scraping-the-australian-energy-market-operator-energy-demand-data
+categories:
+  - R
+tags:
+  - blog
+output:
+  html_document:
+    theme: darkly
+    highlight: tango
+---
+
+
+
+<p>In this post we will examine how to download all of the data energy demand data available from the Australian Energy Market Operator by using their aemo package in R. This data is displayed via a graphic on their page, however the graphic only allows for a specific timeframe of 5 days to be viewed at a time, and only one state at a time too. Thankfully the aemo package will let us download all of it! Let’s load the necessary libraries.</p>
+<pre class="r"><code>library(parsedate)
+library(aemo)
+library(tidyverse)
+library(gridExtra)
+library(plotly)
+library(caret)
+library(htmldeps)</code></pre>
+<p>The most important function we will use from the aemo package is the <code>collate_aemo_data()</code> function. This will start the process of downloading the data to a directory of your choice.</p>
+<pre class="r"><code>collate_aemo_data(path = &quot;~/Downloads/New Folder With Items&quot;, remove_files = FALSE)</code></pre>
+<p>Unfortunately for us, the function does this in the form of different csv files for every single day within the dataset (there are close to 500 csv files that are downloaded). There is also a <code>remove files</code> argument in the <code>collate_aemo_data</code> call, and this is because there used to be a function in the aemo package that would bind the csv files together into one csv file and then delete all of the smaller ones with <code>remove files = TRUE</code>. Aspects of the functions dependencies have since deprecated and those things don’t work anymore (the binding and deleting) so below I present a different way of binding these datasets in a tidy format.</p>
+<p>Below we:
+* set our working directory to where we downloaded the files
+* store a variable containing all of the file names of the csv’s
+* apply the function <code>read.csv()</code> to all of the files in <code>file_list</code>
+* bind all resulting rows with <code>rbind()</code> and <code>Reduce()</code> the result to <code>all_files</code></p>
+<pre class="r"><code>setwd(&quot;~/Downloads/New Folder With Items&quot;)
+
+file_list &lt;- list.files()
+
+all_files &lt;- Reduce(rbind, lapply(file_list, read.csv))</code></pre>
+<p>Next step - filter each state into a seperate dataframe</p>
+<pre class="r"><code>qld_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;QLD1&quot;)
+
+nsw_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;NSW1&quot;)
+
+vic_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;VIC1&quot;)
+
+sa_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;SA1&quot;)
+
+tas_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;TAS1&quot;)
+
+snowy_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;SNOWY1&quot;)</code></pre>
+<p>Dates are inconsistent within and among the csv files. Use the parsedate::parse_date() to make them all conform to POSIXct</p>
+<pre class="r"><code>vic_aemo$SETTLEMENTDATE &lt;- parse_date(vic_aemo$SETTLEMENTDATE)
+
+qld_aemo$SETTLEMENTDATE &lt;- parse_date(qld_aemo$SETTLEMENTDATE)
+
+sa_aemo$SETTLEMENTDATE &lt;- parse_date(sa_aemo$SETTLEMENTDATE)
+
+nsw_aemo$SETTLEMENTDATE &lt;- parse_date(nsw_aemo$SETTLEMENTDATE)
+
+tas_aemo$SETTLEMENTDATE &lt;- parse_date(tas_aemo$SETTLEMENTDATE)
+
+snowy_aemo$SETTLEMENTDATE &lt;- parse_date(snowy_aemo$SETTLEMENTDATE)
+
+## Check for NAs 
+
+sum(is.na(vic_aemo$SETTLEMENTDATE))
+
+sum(is.na(qld_aemo$SETTLEMENTDATE))
+
+sum(is.na(sa_aemo$SETTLEMENTDATE))
+
+sum(is.na(nsw_aemo$SETTLEMENTDATE))
+
+sum(is.na(snowy_aemo$SETTLEMENTDATE))
+
+sum(is.na(tas_aemo$SETTLEMENTDATE))</code></pre>
+<pre class="r"><code>setwd(&quot;~/Downloads/AEMO Clean Data&quot;)
+
+write_csv(vic_aemo, &quot;vic_aemo.csv&quot;)
+write_csv(nsw_aemo, &quot;nsw_aemo.csv&quot;)
+write_csv(qld_aemo, &quot;qld_aemo.csv&quot;)
+write_csv(sa_aemo, &quot;sa_aemo.csv&quot;)
+write_csv(tas_aemo, &quot;tas_aemo.csv&quot;)
+write_csv(snowy_aemo, &quot;snowy_aemo.csv&quot;)</code></pre>

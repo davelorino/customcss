@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Davide Lorino</title>
+    <link>/tags/blog/</link>
+    <description>Recent content in Blog on Davide Lorino</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>STDS Reflection - Scraping the Australian Energy Market Operator &#39;Energy Demand&#39; Data</title>
+      <link>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</link>
+      <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</guid>
+      <description>In this post we will examine how to download all of the data energy demand data available from the Australian Energy Market Operator by using their aemo package in R. This data is displayed via a graphic on their page, however the graphic only allows for a specific timeframe of 5 days to be viewed at a time, and only one state at a time too. Thankfully the aemo package will let us download all of it!</description>
+    </item>
+    
+    <item>
+      <title>Maps with R and Leaflet</title>
+      <link>/untitled/2018-07-24-maps-with-r-and-leaflet/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/2018-07-24-maps-with-r-and-leaflet/</guid>
+      <description>Interactive Maps in R with leaflet 2018-07-24
+Plotting interactive maps is easy with the leaflet package in R. In this short guide we’ll use the Launceston Public Seating dataset to plot markers, add pop-ups and freeze the map on an area of interest. Let’s get started.
+Load the leaflet and dplyr libraries:
+library(leaflet) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union Now lets look at our dataset.</description>
+    </item>
+    
+  </channel>
+</rss>

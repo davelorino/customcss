@@ -1,0 +1,17 @@
+/* Whole document: */
+body{
+  font-family: Courier New;
+  font-size: 16pt;
+  color: #f9f1f1;
+  background-color: #4b5f6d;
+}
+/* Headers */
+h1,h2,h3,h4,h5,h6{
+  font-size: 24pt;
+}
+
+pre {
+    background-color: #f9f1f1ff !important; 
+    font-family: Courier New, courier, monospace;
+}
+

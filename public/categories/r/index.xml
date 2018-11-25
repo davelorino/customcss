@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Davide Lorino</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Davide Lorino</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>STDS Assessment 2C</title>
+      <link>/untitled/stds-assessment-2c/</link>
+      <pubDate>Sun, 07 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/stds-assessment-2c/</guid>
+      <description>Project Review and Contribution to Community   ‘High Voltage’ Group Dynamics   Paul Robertson Edward Truong Mutaz Abu Ghazzaleh Justin White Davide Lorino (myself)  Working with these four individuals in the process of delivering Assessment 2 (and a variety of side projects - see the ‘Apps’ subheading of ‘Contribution to Statistical Thinking Community’ below) was an immense pleasure. Having previously worked with Edward and Paul in Data Science for Innovation and taken Data Algorithms and Meaning with Mutaz (having had many conversations about statistical concepts together) and also working with somebody I hadn’t met yet - Justin White - I was really excited to take on this project together.</description>
+    </item>
+    
+    <item>
+      <title>STDS Reflection - Scraping the Australian Energy Market Operator &#39;Energy Demand&#39; Data</title>
+      <link>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</link>
+      <pubDate>Sat, 06 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/scraping-the-australian-energy-market-operator-energy-demand-data/</guid>
+      <description>In this post we will examine how to download all of the data energy demand data available from the Australian Energy Market Operator by using their aemo package in R. This data is displayed via a graphic on their page, however the graphic only allows for a specific timeframe of 5 days to be viewed at a time, and only one state at a time too. Thankfully the aemo package will let us download all of it!</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with tidytext, ggplot2 and Quanteda </title>
+      <link>/untitled/text-analysis-with-tidytext-ggplot2-and-quanteda/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/text-analysis-with-tidytext-ggplot2-and-quanteda/</guid>
+      <description>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
+Libraries There are a fair few libraries to load for text analysis;
+library(stringr) library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 3.0.0 ✔ readr 1.</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with visNetwork</title>
+      <link>/untitled/text-analysis-with-visnetwork/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/text-analysis-with-visnetwork/</guid>
+      <description>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.</description>
+    </item>
+    
+    <item>
+      <title>Maps with R and Leaflet</title>
+      <link>/untitled/2018-07-24-maps-with-r-and-leaflet/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/2018-07-24-maps-with-r-and-leaflet/</guid>
+      <description>Interactive Maps in R with leaflet 2018-07-24
+Plotting interactive maps is easy with the leaflet package in R. In this short guide we’ll use the Launceston Public Seating dataset to plot markers, add pop-ups and freeze the map on an area of interest. Let’s get started.
+Load the leaflet and dplyr libraries:
+library(leaflet) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union Now lets look at our dataset.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/untitled/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/untitled/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+ </description>
+    </item>
+    
+  </channel>
+</rss>

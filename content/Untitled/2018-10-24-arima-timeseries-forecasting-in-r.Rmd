@@ -1,0 +1,384 @@
+---
+title: 'ARIMA Timeseries Forecasting in R '
+author: "Davide Lorino"
+date: '2018-10-23'
+img: images/blog/2018-08/forecast-hex.jpg
+slug: arima-timeseries-forecasting-in-r
+tags:
+- R
+- Data Science
+- STDS
+categories: []
+---
+
+
+```{r message= FALSE, warning= FALSE, include=FALSE}
+library(highcharter)
+library(forecast)
+library(tsfeatures)
+library(widgetframe)
+library(htmlwidgets)
+```
+
+<center><b> Auto Regressive Integration of Moving Averages </b></center> 
+
+This report aims to explain the desired outcome of the 'Auto Regressive Integration of Moving Averages' (ARIMA) model in it's application towards forecasting energy demand in Australia, as well as the assumptions and limitations that are present through the use of an ARIMA model. ARIMA models are a widely used industry standard for timeseries forecasting.
+
+## Definition
+
+* A timeseries which needs to be differenced to be made stationary is an "integrated" (<b>I</b>) series.
+* Lags of the stationarized series are called "auto-regressive" (<b>AR</b>) terms.
+* Lags of the forecast errors are called "moving average" (<b>MA</b>) terms.
+
+## A Very Short History
+
+ARIMA models have risen to prominence in recent times though they are an adaptation of a discrete-time filtering method developed in the 1930s by electrical engineers (Norbert Weiner et al). Since then, statisticians George Box and Gwilym Jenkins developed systematic methods for applying them to business and economic data in the 1970s (ARIMA models are also sometimes referred to as "Box-Jenkins" models).
+
+## ARIMA Terminology
+
+A non-seasonal ARIMA model is summarized by three key terms:
+
+* <b>p = the number of <i>autoregressive</i> terms
+* d = the number of <i>nonseasonal differences</i>
+* q = the number of <i>moving-average</i> terms</b>
+
+This is called an "ARIMA(p,d,q)" model
+
+## Assumptions
+
+* Stationarity
+
+ARIMA models are among the most widely used forecasting methods for timeseries data because of their tendency to avoid making seasonally biased observations. As a consequence of this, the ARIMA model requires that the timeseries data you are observing is stationary or non-seasonal. One can determine the level of stationarity by plotting data and observing it fluctuations - do the data exhibit temporal seasonality?
+
+This example from 'Forecasting Principles and Practice' (Hyndman & Athanasopoulos 2018) illustrates the process of determining stationarity from a dataset.
+
+<img src="https://otexts.org/fpp2/fpp_files/figure-html/stationary-1.png">
+
+As Hyndman and Athanasopoulos observe, "...obvious seasonality rules out series (d), (h) and (i), while trends and changing levels rule out series (a), (c), (e), (f) and (i). Increasing variance also rules out (i). That leaves only (b) and (g) as stationary series."
+
+With this principle, we can observe our daily and weekly timeseries data to determine the level of stationarity.
+
+```{r echo=FALSE}
+aemo_daily_ts <- readRDS("aemo_daily_ts.rds")
+
+aemo_weekly_ts <- readRDS("aemo_weekly_ts.rds")
+```
+
+# EDA
+
+Features are a set of summary components of timeseries datasets that describe their overall trend, seasonality, spike and entropy. Here we observe the summary features with the ```tsfeatures``` package on our daily and weekly observations.
+
+## TSFeatures 
+
+### Daily Data
+
+```{r}
+daily_features <- tsfeatures(aemo_daily_ts)
+
+daily_features_tables <- DT::datatable(daily_features) %>%
+  frameWidget(height = "100%", width = "100%")
+
+daily_features_tables
+```
+
+### Weekly Data
+
+```{r}
+weekly_features <- tsfeatures(aemo_weekly_ts)
+
+weekly_features_tables <- DT::datatable(weekly_features) %>%
+  frameWidget(height = "100%", width = "100%")
+  
+weekly_features_tables
+```
+
+## ACF
+
+We can see that when applying an Acf function to our data that the data is highly seasonal. The lags are far from the desired "white noise" effect. 
+
+```{r}
+Acf(aemo_weekly_ts)
+```
+
+However, when applying the same Acf test to the data after applying a differencing function, we have much more plausible non-seasonality. The first error term being a negative value is often a by-product of possible over-differencing. The assumptions of the ACF plot are that the lagged errors of the "straight line" model are of no significance and are therefore indicative of stationarity <b>IF</b> those values occur within jagged lines. Here we can see that a number of lags are outside of the lines, and that therefore even after differencing, the data is exhibits a degree of unavoidable trend. 
+
+```{r}
+Acf(diff(aemo_weekly_ts))
+```
+
+## Plotting ARIMA forecasts 
+
+Below is a plot of the daily timeseries observations for NSW energy demand as supplied by the Australian Energy Market Operator. 
+
+To observe the specific difference between the actual timeseries data and the forecasted values, click on 'Series' from the plot legend.
+
+From plotting our timeseries data it is clear that there is a perceptible level of seasonality in the data that we may want to remove in order to derive more accurate forecasts from an ARIMA model. 
+
+### Daily Forecast
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+t.tmp <- ts(aemo_daily_ts, start=1, end = length(aemo_daily_ts))
+t.arima.1 <- auto.arima(t.tmp)
+x.1 <- forecast(t.arima.1, level = c(95, 80))
+
+hchart1 <- hchart(x.1) %>%
+  frameWidget(height = "100%", width = "100%")
+
+hchart1
+```
+
+### Weekly Forecast
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+t.tmp2 <- ts(aemo_daily_ts, start=1, end = length(aemo_weekly_ts))
+t.arima.2 <- auto.arima(t.tmp2)
+x.2 <- forecast(t.arima.2, level = c(95, 80))
+
+hchart2 <- hchart(x.2)
+
+frameWidget(hchart2, height = "100%", width = "100%")
+```
+
+# Transformations
+
+## Box-Cox Transformation 
+
+A Box-Cox transformation is a popular procedure employed to extract the seasonality from timeseries data. Here we can fit an arima model and give the data a box-cox transformation in the same procedure. This is what our residuals looks like when implementing this method.
+
+### Daily Data
+
+From the daily data, applying an auto.arima function in which the lambda is optimized by a box-cox transformation of the series, the lagged autocorrelations in the bottom-left of the plot are well outside the realm of acceptibility. Click on the 'Weekly Data' tab to see a more plausible ACF plot. It seems that our data does not lend itself to an auto.arima function when it is in a daily frequency.
+
+```{r}
+fit <- auto.arima(aemo_daily_ts, lambda = BoxCox.lambda(aemo_daily_ts))
+
+checkresiduals(fit)
+```
+
+### Weekly Data
+
+Much better.
+
+```{r}
+fit2 <- auto.arima(aemo_weekly_ts, lambda = BoxCox.lambda(aemo_weekly_ts))
+
+checkresiduals(fit2)
+```
+
+## Differencing
+
+Differencing is the process of de-seasonalizing data. One popular way of testing whether or not data needs differencing is the kpss test - determining that the test-statistic is equal to or lesser than 1%, and that the data does not need differencing (that there is no seasonal component to the data). Here we can see that our result returns a test statistics of greater than 1% and therefore the data <b>does</b> exhibit seasonality, even in weekly observations. 
+
+```{r message=FALSE}
+library(urca)
+aemo_weekly_ts %>% ur.kpss() %>% summary()
+```
+
+Let's difference the data and see what result we get:
+
+```{r}
+aemo_weekly_ts %>% diff() %>% ur.kpss() %>% summary()
+```
+
+From the above summary we can see that the differenced dataset produces a t-statistic of less than 1%, and therefore the differenced dataset produces a stationary and therefore more ARIMA-friendly timeseries.
+
+## Fitting auto.arima to differenced data
+
+Here we are looking at the strength of one automatically selected model that has been differenced for seasonality; typically industry-standard forecasting would implement an ensemble of forecasts that are enhanced by machine learning algorithms such as extreme gradient boosting. One such example was the feature-based + xgBoost model used by Talaga & Hyndman to take second place at the M4 forecasting competition.
+
+```{r}
+weekly_arima_diff <- auto.arima(aemo_weekly_ts, d=1)
+
+accuracy_diff_arima_table <- DT::datatable(accuracy(weekly_arima_diff)) %>%
+  frameWidget(height = "100%", width = 2400)
+  
+accuracy_diff_arima_table
+```
+
+## ACF
+
+After a timeseries has been stationarized by differencing, the next step when fitting an ARIMA model is to determine whether the <b>auto-regressors</b> or the <b>moving average</b> terms are needed to correct any autocorrelation that remains in the differenced series. At it's core, the ACF plot is a barchart of the coefficients of correlation between a time series, and lags of itself. 
+
+### Non-Differenced ACF
+
+```{r}
+Acf(aemo_weekly_ts)
+```
+
+### Differenced ACF
+
+```{r}
+Acf(diff(aemo_weekly_ts))
+```
+
+### Box-Jung Test
+
+Box-Jung test on differenced data.
+
+```{r}
+Box.test(diff(aemo_weekly_ts), lag=10, type="Ljung-Box")
+```
+
+
+# Model Performance
+
+After some initial exploratory data analysis, we can now proceed to train models and evaluate their accuracy according to standardised measures such as Mean Absolute Standard Error (MASE) and Mean Absolute Percentage Error (MAPE).
+
+```{r}
+library(caret)
+
+aemo_timeSlices_weekly <- createTimeSlices(1:nrow(aemo_weekly_ts), 
+                   initialWindow = 52, horizon = 12, fixedWindow = TRUE)
+
+trainSlices <- aemo_timeSlices_weekly[[1]]
+testSlices <- aemo_timeSlices_weekly[[2]]
+```
+
+Plotting the predictions made by observing the moving average term ("mean"), the random walk model ("naive"), the random walk with drift model ("seasonal naive") and the seasonal trend decomposition model using Loeff ("STLF"). 
+
+```{r}
+
+aemo_window_2 <- window(aemo_weekly_ts,start=1999,end=c(2018,4))
+fit1 <- meanf(aemo_window_2,h=52)
+fit2 <- rwf(aemo_window_2,h=52)
+fit3 <- snaive(aemo_window_2,h=52)
+fit4 <- stlf(aemo_window_2, h=52)
+p55 <- autoplot(window(aemo_weekly_ts, start=2016)) +
+  autolayer(fit1, series="Mean", PI=FALSE) +
+  autolayer(fit2, series="Naïve", PI=FALSE) +
+  autolayer(fit3, series="Seasonal naïve", PI=FALSE) +
+  autolayer(fit4, series="STLF", PI=FALSE) +
+  xlab("Year") + ylab("Demand") +
+  ggtitle("Forecasts for Weekly Energy Demand in NSW") +
+  guides(colour=guide_legend(title="Forecast"))
+
+p55
+
+
+```
+
+## Measures of Success 
+
+### Mean Absolute Scaled Error
+
+Mean Absolute Scaled Error is a measure of model accuracy proposed by <a href="http://www.sciencedirect.com/science/article/pii/S0169207006000239">Hyndman and Kohler (2008)</a> predominantly to provide a <a href="https://en.wikipedia.org/wiki/Scale_invariance">scale-invariant</a> measure of model accuracy; avoiding issues of having a "meaningful zero" or a model that preferences values that are close to zero as being more correct. 
+
+The mean absolute scaled error is represented as the following, where MAE is the mean absolute error: 
+
+<imc src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1540292966/Screen_Shot_2018-10-23_at_10.07.57_pm.png">
+
+### Mean Absolute Percentage Error
+
+A mean absolute percentage error is a measure of model accuracy that very heavily relies on there being no absolute zero term, as a part of the equation relies on dividing the error term by its observed value, which in some instances (including in the case of energy demand) this value can conceivable take on a zero value. For that reason, I will not be measuring model performance on the mean absolute percentage error but rather on the MASE. Just for consistency here is how you would represent the MAPE:
+
+<img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4cf2158513b0345211300fe585cc88a05488b451">
+
+## Auto Arima MASE
+
+Here are the accuracy metrics of a simple ```auto.arima()``` model that is partitioned to have a 12 week holdout (predicting on the final 12 weeks of data that the model is not trained on).
+
+```{r}
+holdout <- 12
+
+arima_forecasts <- lapply(aemo_weekly_ts, function(foo) {
+    subseries <- ts(head(foo,length(foo)-holdout),start=start(foo),frequency=frequency(foo))
+    forecast(auto.arima(subseries),h=holdout)
+})
+
+auto_arima_accuracy <- accuracy(arima_forecasts$totaldemandweek, aemo_weekly_ts)
+
+auto_arima_accuracy_table <- DT::datatable(auto_arima_accuracy) %>% 
+ frameWidget(height = "100%", width = 2400)
+
+auto_arima_accuracy_table
+```
+
+## Benchmarking
+
+An automatically generated arima model with no special data treatment or model ensembling is able to achieve a prediction that isn't half bad. Now, we can compare with a model that is designed to work more closely with data that resembles the AEMO energy demand data - seasonal data. 
+
+### Seasonal Naive Bayes 
+
+Here we show the same measures of accuracybut this time we observe a seasonal naive model with a holdout of 10 weeks.
+
+```{r}
+snaive_forecasts10 <- lapply(aemo_weekly_ts, function(foo) {
+  subseries <- ts(head(foo, length(foo)-10), start = start(foo), frequency = frequency(foo))
+  forecast(rwf(subseries), h=10)
+})
+
+snaive_accuracy_10_weeks <- accuracy(snaive_forecasts10$totaldemandweek, aemo_weekly_ts)
+```
+
+```{r echo=FALSE}
+DT::datatable(snaive_accuracy_10_weeks) %>% frameWidget(height = "100%", width = 2400)
+```
+
+The above model delivers hands-down the worst performance of all 
+
+And eight weeks hold out...
+
+```{r}
+snaive_forecasts_8_weeks <- lapply(aemo_weekly_ts, function(foo) {
+  subseries <- ts(head(foo, length(foo)-8), start = start(foo), frequency = frequency(foo))
+  forecast(rwf(subseries), h=8)
+})
+
+snaive_accuracy_8_weeks <- accuracy(snaive_forecasts_8_weeks$totaldemandweek, aemo_weekly_ts)
+```
+
+```{r echo=FALSE}
+DT::datatable(snaive_accuracy_8_weeks) %>% frameWidget(height = "100%", width = 2400)
+```
+
+Four week holdout...
+
+```{r}
+tbats_forecasts_4_weeks <- lapply(aemo_weekly_ts, function(foo) {
+  subseries <- ts(head(foo, length(foo)-4), start = start(foo), frequency = frequency(foo))
+  forecast(tbats(subseries), h=4)
+})
+
+tbats_accuracy_4_weeks <- accuracy(tbats_forecasts_4_weeks$totaldemandweek, aemo_weekly_ts)
+```
+
+```{r echo=FALSE}
+DT::datatable(tbats_accuracy_4_weeks) %>% frameWidget(height = "100%", width = 2400)
+```
+
+And lastly the two week holdout...
+
+```{r}
+tbats_forecasts_2_weeks <- lapply(aemo_weekly_ts, function(foo) {
+  subseries <- ts(head(foo, length(foo)-2), start = start(foo), frequency = frequency(foo))
+  forecast(tbats(subseries), h=2)
+})
+
+tbats_accuracy_2_weeks <- accuracy(tbats_forecasts_2_weeks$totaldemandweek, aemo_weekly_ts)
+```
+
+```{r echo=FALSE}
+DT::datatable(tbats_accuracy_2_weeks) %>% frameWidget(height = "100%", width = 2400)
+```
+
+```{r eval = FALSE}
+aemo_weekly_auto_arima <- auto.arima(aemo_weekly_ts)
+
+aemo_daily_auto_arima <- auto.arima(aemo_daily_ts)
+
+DT::datatable(accuracy(aemo_weekly_auto_arima)) %>% frameWidget(height = "100%", width = 2400)
+```
+
+# Conclusions
+
+* It is tempting to explore the ARIMA model because it offers the tantalizing prospect of being uninfluenced by potentially erroneous variables, and its able to predict future values based off of past values. 
+* A timeseries statistician using an ARIMA model needs to be prepared to abandon the notion that there are explanatory variables other than time that will predict the value of a dependent variable. 
+* In the case of AEMO energy demand data, I believe that the answer lies somewhere in the grey area; that while we can achieve a reasonable degree of accuracy (or a reasonable low Mean Absolute Standard Error), I intend to continue exploring these methods and beyond. 
+* My next exploration of statistical methods will involve looking a possible ways to use an ARIMAX model; essentially an ARIMA model that also factors in multiple explanatory/independent variables alongside the timeseries forecasting of the ARIMA model. 
+* There is an intuitive and rational logic behind the idea that energy demand is a function of time as well as various other explanatory variables (as we and also Hyndman et al have found, temperature data can play a significant role in energy demand). * An ARIMA model that factors in the linear relationships of independent and dependent variables will achieve a greater level of prediction accuracy than a generalized automatically selected ARIMA model.
+
+
+
+
+
+

@@ -1,0 +1,790 @@
+---
+title: "STDS Assessment 2C"
+author: "Davide Lorino"
+date: '2018-10-07'
+img: images/blog/2018-08/test14.png
+slug: STDS-Assessment-2C
+tags:
+- R
+- Reflection
+- Data Science
+- STDS
+categories:
+- R
+- Data Science
+- Reflection
+---
+
+
+
+<div id="project-review-and-contribution-to-community" class="section level2">
+<h2><b> Project Review and Contribution to Community </b></h2>
+<div id="high-voltage-group-dynamics" class="section level3">
+<h3><b> ‘High Voltage’ Group Dynamics </b></h3>
+<ul>
+<li>Paul Robertson</li>
+<li>Edward Truong</li>
+<li>Mutaz Abu Ghazzaleh</li>
+<li>Justin White</li>
+<li>Davide Lorino (myself)</li>
+</ul>
+<p>Working with these four individuals in the process of delivering Assessment 2 (and a variety of side projects - see the ‘Apps’ subheading of ‘Contribution to Statistical Thinking Community’ below) was an immense pleasure. Having previously worked with Edward and Paul in Data Science for Innovation and taken Data Algorithms and Meaning with Mutaz (having had many conversations about statistical concepts together) and also working with somebody I hadn’t met yet - Justin White - I was really excited to take on this project together.</p>
+</div>
+<div id="group-highlights" class="section level3">
+<h3><b> Group Highlights</b></h3>
+<p>Working with this group was great because everybody had lots to contribute to the group discussions. Edward was an excellent custodian of our master document and would always keep us on-task with our specific component of the project. Paul had fantastic contributions with his modelling of the data as a timeseries. Mutaz made huge breakthroughs with our analysis when he discovered that our data more closely resembled a polynomial distributions, and Justin acquired the temperature data that would ultimately play a significant role in explaining the variance in energy demand.</p>
+</div>
+<div id="individual-contribution-highlights" class="section level3">
+<h3><b> Individual Contribution Highlights </b></h3>
+<p>Reflecting on my overall contribution to the team I can confidently say that I delivered a significant and productive output that was used to support and form a part of the final assessment.</p>
+<p>Areas where I contributed to this assessment were in:</p>
+<ol style="list-style-type: decimal">
+<li><b>Formulating the research question.</b></li>
+</ol>
+<p>This was an area to which we all contributed, though in the early stages of discussion no explicit direction had been taken as to what our research question would be. My contribution in this period of time was to solve the problem of data acquisition and present the suggestion of predicting energy demand based off this particular dataset to the team. Though not an entirely original idea (Kirsty you had informed me that another group had done this before), it was the idea that we chose to stick with.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><b>Acquiring the energy demand data.</b></li>
+</ol>
+<p>I provided the R files to both acquire, clean and perform exploratory data analysis to the team (see Appendix Doc 1 below), as well as a file with a title that to this day, still makes me happy - “AEMO CLEAN NO CODE.html” - this was the html output of the exploratory data analysis that I had done on the AEMO data before we all came to the third class of semester (see Appendix Doc 2)</p>
+<ol start="3" style="list-style-type: decimal">
+<li><b>Performing Exploratory Data Analysis to support the research question.</b></li>
+</ol>
+<p>My exploratory data analysis files (Appendix Doc 2) were submitted to the team on the night before our third class of semester - this was before a research question had been formally decided upon and we were not yet sure whether we wanted to pursue within the energy domain at all, though other ideas had been talked about as well such as gas and solar power. This data analysis was a series of graphs modelling energy demand over time for each state, coupled with side-by-side graphs of price of electricity over time in RRP AUD.</p>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p>A plot of this nature was produced for all states and we could see that there were some pretty convincing relationships - a clear inverse relationship going on there in South Australia, with RRP going up as Demand goes down. We later found other more convincing ways to explain the Demand data, thanks to the work of</p>
+<p>After it had been settled that we would continue with this research question of forecasting energy demand from the AEMO energy data, other members of the group set about wrangling different datasets (population, weather) as well as examining the distribution of the datasets to determine that our distributions were more polynomial than normal; this would later have an impact on the type of linear model that we fit to the data.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><b>Treating the final dataset for outliers - imputing the median</b></li>
+</ol>
+<p>During our on-campus meetup sessions we often thought about ways that we could derive a greater prediction accuracy with a linear model. Several attempts were made to increase the accuracy however the biggest gains were made after two milestones; fitting the model with a polynomial specification, and treating the outliers in the dataset. As demonstrated by running the Appendix Doc 3 we can see that the highest adjusted r squared was achieved by the model that fits a linear model explaining ‘Demand’ by ‘Min and Max Temp’ with a polynomial method specification and imputes the outliers for the median value, so as to maintain the shape of the dataset.</p>
+</div>
+<div id="individual-contribution-lowlights" class="section level3">
+<h3>Individual Contribution Lowlights</h3>
+<p>My only regret about this project was that I was less present in the second half than I was in the first, due to a range of factors concerning my personal and professional life, time was a huge constraint trying to juggle medical appointments, work and university. Despite being less of a fixture in the second half of the project delivery, I was still present at all group meetings outside of class and a regular contributor to the slack channel. In future I would aim to reduce my workload at my day job, however as my direct report was on leave I had taken on their responsibilities in this time. The challenge was immense, as I was to take on those responsibilities as well as demonstrate that I am capable of managing the role on my own so as to prove worthy of promoting into that role if my direct report were to change jobs. This came at a time that my health had also broken down - despite these setbacks I believe that I still contributed greatly to the final product of our assessment.</p>
+</div>
+<div id="contribution-to-the-statistical-thinking-community" class="section level3">
+<h3><b> Contribution to the Statistical Thinking Community </b></h3>
+<p>My contribution to the statistical thinking community as a whole is characterised by a lot of different things.</p>
+<ul>
+<li>Regular posts to the group slack channel</li>
+</ul>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack1.png"> <br></br>
+<img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538909635/Slack2.png"> <br></br></p>
+<ul>
+<li>Meetups on campus minimum three times per week</li>
+</ul>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911631/Profile_Pic.jpg"></p>
+<ul>
+<li>Posts to <a href="www.davelorino.com"><b>my website</b></a> (mostly data analyses or how-to’s on particular packages for R and python)</li>
+<li><p>Extra-curricular events with fellow STDS colleagues such as Mutaz at the GovHack2018 event <a href="https://www.youtube.com/watch?v=lpPmmZWZOBs"><b>(click here to see watch our video submission)</b></a>.</p></li>
+<li><p>Helping other colleagues with assessments (though usually just in the form of small code snippets to solve dplyr-ish problems)</p></li>
+</ul>
+<p><img src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1538911581/Screen_Shot_2018-10-07_at_10.23.56_pm.png"></p>
+<ul>
+<li>Lastly, for work I perform data analysis tasks everyday and produce user-specific applications for individuals within the business. Two such examples of these are embedded below.</li>
+</ul>
+<div id="business-user-apps" class="section level4">
+<h4>Business User Apps</h4>
+<p>Below is a testing model for an application I later went on to deploy at my work (though the deployed model isn’t the same as the one below, this one is purely for demonstration).</p>
+<p><b> The app is embedded into this page.</b> You can interact with it right here. Hover-over data points to get insights, change your individual of interest from the dropdown and check the different tabs (Daily1, Daily2 etc…), the numbering of 1 and 2 just denotes whether the sales agent was dialling on line 1 or line 2.
+<br></br>
+<iframe width="1000" height="1000" scrolling="yes" frameborder="no"  src="https://davelorino.shinyapps.io/OutboundStats/"> </iframe></p>
+<p><br></br></p>
+</div>
+<div id="apps-for-fun" class="section level4">
+<h4>Apps for Fun</h4>
+<p>Below is the app that myself and a colleague submitted after a gruelling weekend of the GovHack2018 challenge. This was a lot of a fun and a fantastic learning experience. Myself and my colleague (whom I am sure will not protest to me naming him here, Durand Sinclair) plotted the rental pricing data provided by the ABS with the occupation earnings data provided by the ATO. With this we then created a leaflet map that would render with shading according to the level of rental stress that the person is in if they were to live in a given area according to the amount the ABS believes you will be paying on average. Our definition of “rental stress” was anything over 30% of your income. See the bottom left-hand corner for the map legend re: rental stress.
+<br></br></p>
+<iframe width="1000" height="1000" scrolling="yes" frameborder="no" src="https://durandsinclair.shinyapps.io/rentstress/#section-occupation">
+</iframe>
+<p>The main point of these apps is that they allow a user to perform statistical analyses of their own - determining how their productivity is a function of their revenue per hour (and vice-versa) aswell as being able to determine exactly what level of rental stress you can expect to have in a given area, either by declaring your income, or declaring your sector and profession to let the ATO data take care of the income for you if, say, you were considering a career change.</p>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3><b>Summary</b></h3>
+<p>In summary, my contributions to the group and to the statistical thinking community over the last two and a half months have been broad and considerable. In addition, I believe that every member of the group did a fantastic job delivering on their component of our project and it would not have been possible without them.</p>
+</div>
+<div id="appendix" class="section level3">
+<h3><b>Appendix</b></h3>
+<p>As indicated in the assessment brief, this section contains R code written by me and broken up by files that were submitted to the groups github. These files form the basis of our data acquisition, cleaning, EDA and modelling for the AEMO data.</p>
+</div>
+<div id="appendix-doc-1---aemo-data-acquisition" class="section level3">
+<h3>Appendix Doc 1 - AEMO Data Acquisition</h3>
+<pre class="r"><code>library(parsedate)
+library(aemo)
+library(tidyverse)
+library(gridExtra)
+library(plotly)
+library(caret)
+
+collate_aemo_data(path = &quot;~/Downloads/New Folder With Items&quot;, remove_files = FALSE)
+
+setwd(&quot;~/Downloads/New Folder With Items&quot;)
+
+file_list &lt;- list.files()
+
+all_files &lt;- Reduce(rbind, lapply(file_list, read.csv))
+
+qld_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;QLD1&quot;)
+
+nsw_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;NSW1&quot;)
+
+vic_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;VIC1&quot;)
+
+sa_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;SA1&quot;)
+
+tas_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;TAS1&quot;)
+
+snowy_aemo &lt;- all_files %&gt;%
+  filter(REGION == &quot;SNOWY1&quot;)
+
+vic_aemo$SETTLEMENTDATE &lt;- parse_date(vic_aemo$SETTLEMENTDATE)
+
+qld_aemo$SETTLEMENTDATE &lt;- parse_date(qld_aemo$SETTLEMENTDATE)
+
+sa_aemo$SETTLEMENTDATE &lt;- parse_date(sa_aemo$SETTLEMENTDATE)
+
+nsw_aemo$SETTLEMENTDATE &lt;- parse_date(nsw_aemo$SETTLEMENTDATE)
+
+tas_aemo$SETTLEMENTDATE &lt;- parse_date(tas_aemo$SETTLEMENTDATE)
+
+snowy_aemo$SETTLEMENTDATE &lt;- parse_date(snowy_aemo$SETTLEMENTDATE)
+
+## Check for NAs 
+
+sum(is.na(vic_aemo$SETTLEMENTDATE))
+
+sum(is.na(qld_aemo$SETTLEMENTDATE))
+
+sum(is.na(sa_aemo$SETTLEMENTDATE))
+
+sum(is.na(nsw_aemo$SETTLEMENTDATE))
+
+sum(is.na(snowy_aemo$SETTLEMENTDATE))
+
+sum(is.na(tas_aemo$SETTLEMENTDATE))
+
+setwd(&quot;~/Downloads/AEMO Clean Data&quot;)
+
+write_csv(vic_aemo, &quot;vic_aemo.csv&quot;)
+write_csv(nsw_aemo, &quot;nsw_aemo.csv&quot;)
+write_csv(qld_aemo, &quot;qld_aemo.csv&quot;)
+write_csv(sa_aemo, &quot;sa_aemo.csv&quot;)
+write_csv(tas_aemo, &quot;tas_aemo.csv&quot;)
+write_csv(snowy_aemo, &quot;snowy_aemo.csv&quot;)</code></pre>
+</div>
+<div id="appendix-doc-2---aemo-data-cleaning-and-eda" class="section level3">
+<h3>Appendix Doc 2 - AEMO Data Cleaning and EDA</h3>
+<div id="south-australia" class="section level4">
+<h4>South Australia</h4>
+<pre class="r"><code>ggplot(sa_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = sa_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = sa_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
+  ggtitle(&quot;South Australia RRP vs Demand&quot;)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>sa_rrp_plot &lt;- ggplot(sa_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = sa_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP - $/MWh&quot;) +
+    ggtitle(&quot;SA&quot;)
+
+sa_demand_plot &lt;- ggplot(sa_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = sa_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand - MW&quot;) +
+  ggtitle(&quot;SA&quot;)
+
+grid.arrange(sa_rrp_plot + ggtitle(&quot;South Australia Energy RRP&quot;), sa_demand_plot + ggtitle(&quot;South Australia Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+</div>
+<div id="queensland" class="section level4">
+<h4>Queensland</h4>
+<pre class="r"><code>ggplot(qld_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = qld_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = qld_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
+  ggtitle(&quot;Queensland RRP vs Demand&quot;)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>qld_rrp_plot &lt;- ggplot(qld_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = qld_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP - $/MWh&quot;) +
+    ggtitle(&quot;QLD&quot;)
+
+qld_demand_plot &lt;- ggplot(qld_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = qld_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand - MW&quot;) +
+  ggtitle(&quot;QLD&quot;)
+
+grid.arrange(qld_rrp_plot + ggtitle(&quot;Queensland Energy RRP&quot;), qld_demand_plot + ggtitle(&quot;Queensland Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="new-south-wales" class="section level2">
+<h2>New South Wales</h2>
+<pre class="r"><code>ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = nsw_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = nsw_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
+  ggtitle(&quot;NSW RRP vs Demand&quot;)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>nsw_rrp_plot &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = nsw_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP $/MWh&quot;) +
+    ggtitle(&quot;NSW&quot;)
+
+nsw_demand_plot &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = nsw_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand MW&quot;) +
+  ggtitle(&quot;NSW&quot;)
+
+grid.arrange(nsw_rrp_plot + ggtitle(&quot;NSW Energy RRP&quot;), nsw_demand_plot + ggtitle(&quot;NSW Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<div id="victoria" class="section level4">
+<h4>Victoria</h4>
+<pre class="r"><code>ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = vic_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = vic_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
+  ggtitle(&quot;Victoria RRP vs Demand&quot;)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>vic_rrp_plot &lt;- ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = vic_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP $/MWh&quot;) +
+    ggtitle(&quot;VIC&quot;)
+
+vic_demand_plot &lt;- ggplot(vic_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = vic_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand MW&quot;) +
+  ggtitle(&quot;VIC&quot;)
+
+grid.arrange(vic_rrp_plot + ggtitle(&quot;Victoria Energy RRP&quot;), vic_demand_plot + ggtitle(&quot;Victoria Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+</div>
+<div id="tasmania" class="section level4">
+<h4>Tasmania</h4>
+<pre class="r"><code>ggplot(tas_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = tas_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = tas_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) +
+  ggtitle(&quot;Tasmania RRP vs Demand&quot;)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>tas_rrp_plot &lt;- ggplot(tas_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = tas_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP $/MWh&quot;) +
+    ggtitle(&quot;TAS&quot;)
+
+tas_demand_plot &lt;- ggplot(tas_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = tas_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand MW&quot;) +
+  ggtitle(&quot;TAS&quot;)
+
+grid.arrange(tas_rrp_plot + ggtitle(&quot;Tasmania Energy RRP&quot;), tas_demand_plot + ggtitle(&quot;Tasmania Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+</div>
+<div id="snowy-mountains" class="section level4">
+<h4>Snowy Mountains</h4>
+<pre class="r"><code>ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = snowy_aemo_clean$RRP, colour = &quot;RRP $/MWh&quot;)) +
+  geom_smooth(aes(y = snowy_aemo_clean$TOTALDEMAND, colour = &quot;Total Demand MW&quot;)) </code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>snowy_rrp_plot &lt;- ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
+    geom_smooth(aes(y = snowy_aemo_clean$RRP), se = FALSE) +
+    xlab(&quot;Settlement Date&quot;) +
+    ylab(&quot;RRP $/MWh&quot;) +
+    ggtitle(&quot;Snowy Mnts.&quot;)
+
+snowy_demand_plot &lt;- ggplot(snowy_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = snowy_aemo_clean$TOTALDEMAND), se = FALSE) +
+  xlab(&quot;Settlement Date&quot;) +
+  ylab(&quot;Demand MW&quot;) +
+  ggtitle(&quot;Snowy Mnts.&quot;)
+
+grid.arrange(snowy_rrp_plot + ggtitle(&quot;Snowy Mountains Energy RRP&quot;), snowy_demand_plot + ggtitle(&quot;Snowy Mountains Energy Demand&quot;), nrow = 1)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+</div>
+<div id="energy-demand---all-states" class="section level4">
+<h4>Energy Demand - All States</h4>
+<pre class="r"><code>grid.arrange(sa_demand_plot, qld_demand_plot, nsw_demand_plot, vic_demand_plot, tas_demand_plot, snowy_demand_plot, nrow = 2, ncol = 3, top = textGrob(&quot;Energy Demand by State&quot;))</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="energy-rrp---all-states" class="section level4">
+<h4>Energy RRP - All States</h4>
+<pre class="r"><code>grid.arrange(sa_rrp_plot, qld_rrp_plot, nsw_rrp_plot, vic_rrp_plot, tas_rrp_plot, snowy_rrp_plot, nrow = 2, ncol = 3, top = textGrob(&quot;Energy RRP by State&quot;))</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="energy-demand---nsw-qld-sa-vic" class="section level4">
+<h4>Energy Demand - NSW, QLD, SA &amp; VIC</h4>
+<pre class="r"><code>nsw_qld_vic_sa_demand &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = nsw_aemo_clean$TOTALDEMAND, colour = &quot;NSW&quot;)) +
+  geom_smooth(aes(y = qld_aemo_clean$TOTALDEMAND, colour = &quot;QLD&quot;)) +
+  geom_smooth(aes(y = sa_aemo_clean$TOTALDEMAND, colour = &quot;SA&quot;)) +
+  geom_smooth(aes(y = vic_aemo_clean$TOTALDEMAND, colour = &quot;VIC&quot;)) +
+  xlab(&quot;Date&quot;) +
+  ylab(&quot;Demand - MW&quot;) +
+  ggtitle(&quot;Energy Demand: NSW, QLD, VIC &amp; SA&quot;)
+
+nsw_qld_vic_sa_demand</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="energy-rrp---nsw-qld-sa-vic" class="section level4">
+<h4>Energy RRP - NSW, QLD, SA &amp; VIC</h4>
+<pre class="r"><code>nsw_qld_vic_sa_rrp &lt;- ggplot(nsw_aemo_clean, aes(x = SETTLEMENTDATE)) +
+  geom_smooth(aes(y = nsw_aemo_clean$RRP, colour = &quot;NSW&quot;), se = FALSE) +
+  geom_smooth(aes(y = qld_aemo_clean$RRP, colour = &quot;QLD&quot;), se = FALSE) +
+  geom_smooth(aes(y = sa_aemo_clean$RRP, colour = &quot;SA&quot;), se = FALSE) +
+  geom_smooth(aes(y = vic_aemo_clean$RRP, colour = &quot;VIC&quot;), se = FALSE) +
+  xlab(&quot;Date&quot;) +
+  ylab(&quot;RRP - $/MWh&quot;) +
+  ggtitle(&quot;Energy RRP: NSW, QLD, VIC &amp; SA&quot;)
+
+nsw_qld_vic_sa_rrp</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="demand-and-rrp---nsw-qld-vic-sa" class="section level4">
+<h4>Demand and RRP - NSW, QLD, VIC &amp; SA</h4>
+<pre class="r"><code>grid.arrange(nsw_qld_vic_sa_demand + ggtitle(&quot;Demand&quot;), nsw_qld_vic_sa_rrp + ggtitle(&quot;RRP&quot;), ncol = 2)</code></pre>
+<p><img src="/blog/STDS-Assessment-2C_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="appendix-doc-3---imputing-outliers-and-fitting-linear-models" class="section level3">
+<h3>Appendix Doc 3 - Imputing Outliers and Fitting Linear Models</h3>
+<pre class="r"><code>daily_demand_and_temp &lt;- read_csv(&quot;joindf.csv&quot;)
+
+
+tas_daily_demand_and_temp &lt;- daily_demand_and_temp %&gt;%
+  filter(REGION == &quot;TAS&quot;)
+
+nsw_daily_demand_and_temp &lt;- daily_demand_and_temp %&gt;%
+  filter(REGION == &quot;NSW&quot;)
+
+qld_daily_demand_and_temp &lt;- daily_demand_and_temp %&gt;%
+  filter(REGION == &quot;QLD&quot;)
+
+sa_daily_demand_and_temp &lt;- daily_demand_and_temp %&gt;%
+  filter(REGION == &quot;SA&quot;)
+
+vic_daily_demand_and_temp &lt;- daily_demand_and_temp %&gt;%
+  filter(REGION == &quot;VIC&quot;)
+
+### Outlier Detection
+
+Tasmania Energy Demand Outliers (hover over the bars to see their values)
+
+tas_hist_with_outliers &lt;- ggplot(tas_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;Tas Outliers&quot;)
+
+tas_outliers &lt;- boxplot.stats(tas_daily_demand_and_temp$totaldemandday)$out
+tas_outliers 
+
+tas_median_outliers &lt;- tas_daily_demand_and_temp 
+tas_median_outliers$totaldemandday &lt;- ifelse(tas_daily_demand_and_temp$totaldemandday %in% tas_outliers, median(tas_daily_demand_and_temp$totaldemandday), tas_daily_demand_and_temp$totaldemandday)
+
+tas_hist_without_outliers &lt;- ggplot(tas_median_outliers, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;Tas Outliers As Median&quot;)
+
+
+tas_density_diagram &lt;- ggplot(tas_median_outliers, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;Tas Density Dist.&quot;)
+
+tas_density_diagram_outliers &lt;- ggplot(tas_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;Tas Outliers Density Dist.&quot;)
+
+
+grid.arrange(tas_hist_with_outliers, tas_hist_without_outliers, tas_density_diagram_outliers, tas_density_diagram, nrow = 2)
+
+nsw_hist_with_outliers &lt;- ggplot(nsw_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;NSW Outliers&quot;)
+
+nsw_outliers &lt;- boxplot.stats(nsw_daily_demand_and_temp$totaldemandday)$out
+
+nsw_median_outliers &lt;- nsw_daily_demand_and_temp 
+nsw_median_outliers$totaldemandday &lt;- ifelse(nsw_daily_demand_and_temp$totaldemandday %in% nsw_outliers, median(nsw_daily_demand_and_temp$totaldemandday), nsw_daily_demand_and_temp$totaldemandday)
+
+nsw_hist_without_outliers &lt;- ggplot(nsw_median_outliers, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;NSW Outliers As Median&quot;)
+
+
+nsw_density_diagram &lt;- ggplot(nsw_median_outliers, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;NSW Density Dist.&quot;)
+
+nsw_density_diagram_outliers &lt;- ggplot(nsw_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;NSW Outliers Density Dist.&quot;)
+
+
+grid.arrange(nsw_hist_with_outliers, nsw_hist_without_outliers, nsw_density_diagram_outliers, nsw_density_diagram, nrow = 2)
+
+vic_hist_with_outliers &lt;- ggplot(vic_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;VIC Outliers&quot;)
+
+vic_outliers &lt;- boxplot.stats(vic_daily_demand_and_temp$totaldemandday)$out
+
+vic_median_outliers &lt;- vic_daily_demand_and_temp 
+vic_median_outliers$totaldemandday &lt;- ifelse(vic_daily_demand_and_temp$totaldemandday %in% vic_outliers, median(vic_daily_demand_and_temp$totaldemandday), vic_daily_demand_and_temp$totaldemandday)
+
+vic_hist_without_outliers &lt;- ggplot(vic_median_outliers, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;VIC Outliers As Median&quot;)
+
+
+vic_density_diagram &lt;- ggplot(vic_median_outliers, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;VIC Density Dist.&quot;)
+
+vic_density_diagram_outliers &lt;- ggplot(vic_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;VIC Outliers Density Dist.&quot;)
+
+
+grid.arrange(vic_hist_with_outliers, vic_hist_without_outliers, vic_density_diagram_outliers, vic_density_diagram, nrow = 2)
+
+qld_hist_with_outliers &lt;- ggplot(qld_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;QLD Outliers&quot;)
+
+qld_outliers &lt;- boxplot.stats(qld_daily_demand_and_temp$totaldemandday)$out
+
+qld_median_outliers &lt;- qld_daily_demand_and_temp 
+qld_median_outliers$totaldemandday &lt;- ifelse(qld_daily_demand_and_temp$totaldemandday %in% qld_outliers, median(qld_daily_demand_and_temp$totaldemandday), qld_daily_demand_and_temp$totaldemandday)
+
+qld_hist_without_outliers &lt;- ggplot(qld_median_outliers, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;QLD Outliers As Median&quot;)
+
+
+qld_density_diagram &lt;- ggplot(qld_median_outliers, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;QLD Density Dist.&quot;)
+
+qld_density_diagram_outliers &lt;- ggplot(qld_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;QLD Outliers Density Dist.&quot;)
+
+
+grid.arrange(qld_hist_with_outliers, qld_hist_without_outliers, qld_density_diagram_outliers, qld_density_diagram, nrow = 2)
+
+sa_hist_with_outliers &lt;- ggplot(sa_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;SA Outliers&quot;)
+
+sa_outliers &lt;- boxplot.stats(sa_daily_demand_and_temp$totaldemandday)$out
+
+sa_median_outliers &lt;- sa_daily_demand_and_temp 
+sa_median_outliers$totaldemandday &lt;- ifelse(sa_daily_demand_and_temp$totaldemandday %in% sa_outliers, median(sa_daily_demand_and_temp$totaldemandday), sa_daily_demand_and_temp$totaldemandday)
+
+sa_hist_without_outliers &lt;- ggplot(sa_median_outliers, aes(x = totaldemandday)) +
+  geom_histogram() +
+  ggtitle(&quot;SA Outliers As Median&quot;)
+
+
+sa_density_diagram &lt;- ggplot(sa_median_outliers, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;SA Density Dist.&quot;)
+
+sa_density_diagram_outliers &lt;- ggplot(sa_daily_demand_and_temp, aes(x = totaldemandday)) +
+  geom_density() +
+  ggtitle(&quot;SA Outliers Density Dist.&quot;)
+
+
+grid.arrange(sa_hist_with_outliers, sa_hist_without_outliers, sa_density_diagram_outliers, sa_density_diagram, nrow = 2)
+
+
+## Bind all rows from the separate dataframes where the outliers have been converted to the median demand of each state respectively
+
+all_states_median_outliers &lt;- rbind(nsw_median_outliers, qld_median_outliers, tas_median_outliers, vic_median_outliers, sa_median_outliers)
+
+## write.csv(all_states_median_outliers, &quot;joindf_no_outliers.csv&quot;)
+
+joindf_no_outliers &lt;- read_csv(&quot;joindf_no_outliers.csv&quot;)
+
+demand_min_max_temp &lt;- joindf %&gt;% filter (REGION == &quot;NSW&quot;) %&gt;% 
+  ggplot() + 
+  ggtitle(&quot;Demand, Min and Max Temps (With Outliers)&quot;) +
+  geom_line(aes(x=settelmentdate, y=totaldemandday/10000), color=&quot;blue&quot;) + 
+  geom_line(aes(x=settelmentdate , y=TempMax_C), color=&quot;red&quot;) + 
+  geom_line(aes(x=settelmentdate , y=TempMin_C), color=&quot;green&quot;)
+scale_x_date()
+
+demand_min_max_temp %&gt;%
+  ggplotly()
+
+demand_min_max_temp_no_outliers &lt;- joindf_no_outliers %&gt;% filter (REGION == &quot;NSW&quot;) %&gt;% 
+  ggplot() + 
+  geom_line(aes(x=settelmentdate, y=totaldemandday/10000), color=&quot;blue&quot;) + 
+  ggtitle(&quot;Demand, Min and Max Temps (No Outliers)&quot;) +
+  geom_line(aes(x=settelmentdate , y=TempMax_C), color=&quot;red&quot;) + 
+  geom_line(aes(x=settelmentdate , y=TempMin_C), color=&quot;green&quot;)
+scale_x_date()
+
+demand_min_max_temp_no_outliers %&gt;%
+  ggplotly()
+
+## scatter plot of temperature variables and demand, outliers retained
+
+joindf %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% 
+  ggplot( aes(x=TempMax_C, y=totaldemandday)) + 
+  geom_point() + geom_smooth() + 
+  scale_y_log10() + 
+  scale_x_log10()
+
+## scatter plot of temperature variables and demand, outliers removed
+
+joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% 
+  ggplot( aes(x=TempMax_C, y=totaldemandday)) + 
+  geom_point() + geom_smooth() + 
+  scale_y_log10() + 
+  scale_x_log10()
+
+
+#### can we get a correlation plot here?  ####
+
+cor(
+  joindf %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% select(TempMin_C),
+  joindf %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% select(TempMax_C)
+)
+
+#### can we get a correlation plot here?  ####
+cor(
+  joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% select(TempMin_C),
+  joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% select(TempMax_C)
+)
+
+plot(
+  joindf_no_outliers %&gt;%
+    filter(REGION == &quot;NSW&quot;) %&gt;%
+    mutate(TempAvg = (TempMax_C - TempMin_C)/2) %&gt;% 
+    select(
+      totaldemandday,
+      TempMin_C,
+      TempMax_C,
+      Temp9am_C,
+      Temp3pm_C, 
+      TempAvg
+    )
+)
+
+plot(
+  joindf_no_outliers %&gt;%
+    filter(REGION == &quot;NSW&quot;) %&gt;%
+    select(
+      totaldemandday,
+      minrrp, 
+      maxrrp, 
+      meanrrp, 
+      medianrrp
+    )
+)
+
+library(corrplot)
+
+df_n &lt;- joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;) %&gt;% select_if(is.numeric)
+
+df_corr &lt;- cor(df_n)
+p.mat &lt;- cor.mtest(df_corr)
+col &lt;- colorRampPalette(c(&quot;#BB4444&quot;, &quot;#EE9988&quot;, &quot;#FFFFFF&quot;, &quot;#77AADD&quot;, &quot;#4477AA&quot;))
+corrplot(df_corr, 
+         method = &quot;color&quot;, 
+         order=&quot;hclust&quot;,
+         type = &quot;full&quot;, 
+         col=col(200),
+         diag = F, 
+         title=&quot;Correlation of Numeric Variables&quot; , 
+         addCoef.col = &quot;black&quot;, # Add coefficient of correlation
+         # Combine with significance
+         sig.level = 0.05, insig = &quot;blank&quot; ,
+         mar=c(0,0,3,0)) # http://stackoverflow.com/a/14754408/54964)
+# hide correlation coefficient on the principal diagonal)
+# plot(df_n)</code></pre>
+</div>
+<div id="fitting-a-linear-model" class="section level3">
+<h3>Fitting a linear model</h3>
+<pre class="r"><code>simplelm &lt;- lm(data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+               formula = totaldemandday ~ TempMin_C + TempMax_C)
+plot(simplelm)
+summary(simplelm)
+
+simplelm &lt;- lm(data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+               formula = totaldemandday ~ TempMin_C + TempMax_C)
+plot(simplelm)
+summary(simplelm)
+
+## Probability of values occuring randomly is greater than .05 and therefore not explained by predictors
+
+mod1 &lt;- lm (data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ TempMin_C )
+plot(mod1)
+summary(mod1)
+
+## Probability of values occuring randomly is greater than .05 and therefore not explained by predictors
+
+mod1 &lt;- lm (data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ TempMin_C )
+plot(mod1)
+summary(mod1)
+
+mod2 &lt;- lm (data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ TempMax_C )
+plot(mod2)
+summary(mod2)
+
+mod2 &lt;- lm (data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ TempMax_C )
+plot(mod2)
+summary(mod2)
+
+mod3poly &lt;- lm (data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ poly(TempMin_C,2) + poly(TempMax_C,2))
+
+summary(mod3poly)
+
+mod3poly &lt;- lm (data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+            formula = totaldemandday ~ poly(TempMin_C,2) + poly(TempMax_C,2))
+
+summary(mod3poly)
+
+plot(mod3poly$fitted.values, mod3poly$residuals)
+hist(mod3poly$residuals)
+
+mod4Interaction &lt;- lm (data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+                formula = totaldemandday ~ I(TempMin_C^2) * I(TempMax_C^2))
+
+summary(mod4Interaction)
+
+mod4Interaction &lt;- lm (data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+                formula = totaldemandday ~ I(TempMin_C^2) * I(TempMax_C^2))
+
+summary(mod4Interaction)
+
+mod5PolyInteraction &lt;- lm (data = joindf %&gt;% filter(REGION == &quot;NSW&quot;), 
+                       formula = totaldemandday ~ I(poly(TempMin_C,2)) * I(poly(TempMax_C,2)))
+
+summary(mod5PolyInteraction)
+
+mod5PolyInteraction &lt;- lm(data = joindf_no_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+                       formula = totaldemandday ~ I(poly(TempMin_C,2)) * I(poly(TempMax_C,2)))
+
+summary(mod5PolyInteraction)
+
+#### model assumptions analysis -- important ####
+#### https://www.youtube.com/watch?v=eTZ4VUZHzxw  
+
+#### Check the distribuiton of the demand with outliers
+
+joindf %&gt;%  filter( REGION %in% c(&quot;NSW&quot;, &quot;QLD&quot;, &quot;VIC&quot;)) %&gt;% 
+  ggplot(aes(x=totaldemandday)) + geom_histogram() + 
+  facet_wrap( ~ REGION)
+
+#### Check distribution of demand without outliers
+
+joindf_no_outliers %&gt;%  filter( REGION %in% c(&quot;NSW&quot;, &quot;QLD&quot;, &quot;VIC&quot;)) %&gt;% 
+  ggplot(aes(x=totaldemandday)) + geom_histogram() + 
+  facet_wrap( ~ REGION)
+
+#### Other states - with outliers
+
+joindf %&gt;%  filter( !REGION %in% c(&quot;NSW&quot;, &quot;QLD&quot;, &quot;VIC&quot;)) %&gt;% 
+  ggplot(aes(x=totaldemandday)) + geom_histogram() + 
+  facet_wrap( ~ REGION)
+
+#### Other states - without outliers
+
+joindf_no_outliers %&gt;%  filter( !REGION %in% c(&quot;NSW&quot;, &quot;QLD&quot;, &quot;VIC&quot;)) %&gt;% 
+  ggplot(aes(x=totaldemandday)) + geom_histogram() + 
+  facet_wrap( ~ REGION)
+
+library(moments)
+
+joindf %&gt;% group_by(REGION) %&gt;% 
+  summarise(
+    mean=mean(totaldemandday), 
+    sd = sd(totaldemandday), 
+    skewness = skewness(totaldemandday), 
+    kurtosis = kurtosis(totaldemandday)
+  )
+
+## mean and sd for each region can then be used to znorm the outcome assuming it follows a normal distrubution 
+
+joindf_no_outliers %&gt;% group_by(REGION) %&gt;% 
+  summarise(
+    mean=mean(totaldemandday), 
+    sd = sd(totaldemandday), 
+    skewness = skewness(totaldemandday), 
+    kurtosis = kurtosis(totaldemandday)
+  )
+## mean and sd for each region can then be used to znorm the outcome assuming it follows a normal distrubution 
+
+## Create train and test splits for datasets (with and without outliers)
+
+train_with_outliers &lt;- joindf %&gt;%
+  filter(settelmentdate &lt; &quot;2018-05-01&quot;)
+
+nrow(train_with_outliers)
+
+test_with_outliers &lt;- joindf %&gt;%
+  filter(!settelmentdate %in% train_with_outliers$settelmentdate)
+
+nrow(test_with_outliers)
+
+train_without_outliers &lt;- joindf_no_outliers %&gt;%
+  filter(settelmentdate &lt; &quot;2018-05-01&quot;)
+
+nrow(train_without_outliers)
+
+test_without_outliers &lt;- joindf_no_outliers %&gt;%
+  filter(!settelmentdate %in% train_without_outliers$settelmentdate)
+
+nrow(test_without_outliers)
+
+test_with_outliers_minus_na &lt;- test_with_outliers %&gt;%
+  filter(!is.na(TempMax_C))
+
+mod5PolyInteraction_train_with_outlier &lt;- lm(data = train_with_outliers %&gt;% filter(REGION == &quot;NSW&quot;), 
+                       formula = totaldemandday ~ I(poly(TempMin_C,2)) * I(poly(TempMax_C,2)))
+
+
+test_nsw &lt;- test_with_outliers_minus_na %&gt;% filter(REGION == &quot;NSW&quot;)
+predictions_with_outliers &lt;- predict(mod5PolyInteraction_train_with_outlier, test_nsw %&gt;%
+          select(-totaldemandday))
+
+
+evaluate &lt;- function(ts,y, yhat){
+  eval_list &lt;- list()
+  eval_list$df &lt;- data.frame(ts, y, yhat, r = y - yhat)
+  eval_list$RMSE &lt;- sqrt(mean(eval_list$df$r^2))
+  eval_list$MAE &lt;- mean(abs(eval_list$df$r))
+  eval_list$MSE &lt;- mean(eval_list$df$r^2)
+  eval_list$MAPE &lt;- mean(abs(eval_list$df$r/eval_list$df$y)) * 100
+  eval_list$MPE &lt;- mean(eval_list$df$r/eval_list$df$y) * 100
+  return(eval_list)
+}
+
+evaluations &lt;- evaluate(test_nsw$settelmentdate, test_nsw$totaldemandday, predictions_with_outliers)
+
+evaluations
+
+hist(evaluations$df$r)
+
+evaluations$df %&gt;% 
+  ggplot() + 
+  geom_line(aes(x=ts, y=yhat), color=&quot;red&quot;) +
+  geom_line(aes(x=ts, y=y), color =&quot;grey&quot;) + 
+  scale_x_date()</code></pre>
+</div>
+</div>

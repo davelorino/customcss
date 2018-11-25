@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reflection on Davide Lorino</title>
+    <link>/categories/reflection/</link>
+    <description>Recent content in Reflection on Davide Lorino</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Oct 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/reflection/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>STDS Assessment 2C</title>
+      <link>/untitled/stds-assessment-2c/</link>
+      <pubDate>Sun, 07 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/untitled/stds-assessment-2c/</guid>
+      <description>Project Review and Contribution to Community   ‘High Voltage’ Group Dynamics   Paul Robertson Edward Truong Mutaz Abu Ghazzaleh Justin White Davide Lorino (myself)  Working with these four individuals in the process of delivering Assessment 2 (and a variety of side projects - see the ‘Apps’ subheading of ‘Contribution to Statistical Thinking Community’ below) was an immense pleasure. Having previously worked with Edward and Paul in Data Science for Innovation and taken Data Algorithms and Meaning with Mutaz (having had many conversations about statistical concepts together) and also working with somebody I hadn’t met yet - Justin White - I was really excited to take on this project together.</description>
+    </item>
+    
+  </channel>
+</rss>

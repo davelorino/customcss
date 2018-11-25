@@ -1,0 +1,336 @@
+---
+title: 'ARIMA Timeseries Forecasting in R '
+author: "Davide Lorino"
+date: '2018-10-23'
+img: images/blog/2018-08/forecast-hex.jpg
+slug: arima-timeseries-forecasting-in-r
+tags:
+- R
+- Data Science
+- STDS
+categories: []
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+
+
+<center>
+<b> Auto Regressive Integration of Moving Averages </b>
+</center>
+<p>This report aims to explain the desired outcome of the ‘Auto Regressive Integration of Moving Averages’ (ARIMA) model in it’s application towards forecasting energy demand in Australia, as well as the assumptions and limitations that are present through the use of an ARIMA model. ARIMA models are a widely used industry standard for timeseries forecasting.</p>
+<div id="definition" class="section level2">
+<h2>Definition</h2>
+<ul>
+<li>A timeseries which needs to be differenced to be made stationary is an “integrated” (<b>I</b>) series.</li>
+<li>Lags of the stationarized series are called “auto-regressive” (<b>AR</b>) terms.</li>
+<li>Lags of the forecast errors are called “moving average” (<b>MA</b>) terms.</li>
+</ul>
+</div>
+<div id="a-very-short-history" class="section level2">
+<h2>A Very Short History</h2>
+<p>ARIMA models have risen to prominence in recent times though they are an adaptation of a discrete-time filtering method developed in the 1930s by electrical engineers (Norbert Weiner et al). Since then, statisticians George Box and Gwilym Jenkins developed systematic methods for applying them to business and economic data in the 1970s (ARIMA models are also sometimes referred to as “Box-Jenkins” models).</p>
+</div>
+<div id="arima-terminology" class="section level2">
+<h2>ARIMA Terminology</h2>
+<p>A non-seasonal ARIMA model is summarized by three key terms:</p>
+<ul>
+<li><b>p = the number of <i>autoregressive</i> terms</li>
+<li>d = the number of <i>nonseasonal differences</i></li>
+<li>q = the number of <i>moving-average</i> terms</b></li>
+</ul>
+<p>This is called an “ARIMA(p,d,q)” model</p>
+</div>
+<div id="assumptions" class="section level2">
+<h2>Assumptions</h2>
+<ul>
+<li>Stationarity</li>
+</ul>
+<p>ARIMA models are among the most widely used forecasting methods for timeseries data because of their tendency to avoid making seasonally biased observations. As a consequence of this, the ARIMA model requires that the timeseries data you are observing is stationary or non-seasonal. One can determine the level of stationarity by plotting data and observing it fluctuations - do the data exhibit temporal seasonality?</p>
+<p>This example from ‘Forecasting Principles and Practice’ (Hyndman &amp; Athanasopoulos 2018) illustrates the process of determining stationarity from a dataset.</p>
+<p><img src="https://otexts.org/fpp2/fpp_files/figure-html/stationary-1.png"></p>
+<p>As Hyndman and Athanasopoulos observe, “…obvious seasonality rules out series (d), (h) and (i), while trends and changing levels rule out series (a), (c), (e), (f) and (i). Increasing variance also rules out (i). That leaves only (b) and (g) as stationary series.”</p>
+<p>With this principle, we can observe our daily and weekly timeseries data to determine the level of stationarity.</p>
+</div>
+<div id="eda" class="section level1">
+<h1>EDA</h1>
+<p>Features are a set of summary components of timeseries datasets that describe their overall trend, seasonality, spike and entropy. Here we observe the summary features with the <code>tsfeatures</code> package on our daily and weekly observations.</p>
+<div id="tsfeatures" class="section level2">
+<h2>TSFeatures</h2>
+<div id="daily-data" class="section level3">
+<h3>Daily Data</h3>
+<pre class="r"><code>daily_features &lt;- tsfeatures(aemo_daily_ts)
+
+daily_features_tables &lt;- DT::datatable(daily_features) %&gt;%
+  frameWidget(height = &quot;100%&quot;, width = &quot;100%&quot;)
+
+daily_features_tables</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-3.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="weekly-data" class="section level3">
+<h3>Weekly Data</h3>
+<pre class="r"><code>weekly_features &lt;- tsfeatures(aemo_weekly_ts)
+
+weekly_features_tables &lt;- DT::datatable(weekly_features) %&gt;%
+  frameWidget(height = &quot;100%&quot;, width = &quot;100%&quot;)
+  
+weekly_features_tables</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-4.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="acf" class="section level2">
+<h2>ACF</h2>
+<p>We can see that when applying an Acf function to our data that the data is highly seasonal. The lags are far from the desired “white noise” effect.</p>
+<pre class="r"><code>Acf(aemo_weekly_ts)</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>However, when applying the same Acf test to the data after applying a differencing function, we have much more plausible non-seasonality. The first error term being a negative value is often a by-product of possible over-differencing. The assumptions of the ACF plot are that the lagged errors of the “straight line” model are of no significance and are therefore indicative of stationarity <b>IF</b> those values occur within jagged lines. Here we can see that a number of lags are outside of the lines, and that therefore even after differencing, the data is exhibits a degree of unavoidable trend.</p>
+<pre class="r"><code>Acf(diff(aemo_weekly_ts))</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="plotting-arima-forecasts" class="section level2">
+<h2>Plotting ARIMA forecasts</h2>
+<p>Below is a plot of the daily timeseries observations for NSW energy demand as supplied by the Australian Energy Market Operator.</p>
+<p>To observe the specific difference between the actual timeseries data and the forecasted values, click on ‘Series’ from the plot legend.</p>
+<p>From plotting our timeseries data it is clear that there is a perceptible level of seasonality in the data that we may want to remove in order to derive more accurate forecasts from an ARIMA model.</p>
+<div id="daily-forecast" class="section level3">
+<h3>Daily Forecast</h3>
+<div id="htmlwidget-3" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-7.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="weekly-forecast" class="section level3">
+<h3>Weekly Forecast</h3>
+<div id="htmlwidget-4" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-8.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="transformations" class="section level1">
+<h1>Transformations</h1>
+<div id="box-cox-transformation" class="section level2">
+<h2>Box-Cox Transformation</h2>
+<p>A Box-Cox transformation is a popular procedure employed to extract the seasonality from timeseries data. Here we can fit an arima model and give the data a box-cox transformation in the same procedure. This is what our residuals looks like when implementing this method.</p>
+<div id="daily-data-1" class="section level3">
+<h3>Daily Data</h3>
+<p>From the daily data, applying an auto.arima function in which the lambda is optimized by a box-cox transformation of the series, the lagged autocorrelations in the bottom-left of the plot are well outside the realm of acceptibility. Click on the ‘Weekly Data’ tab to see a more plausible ACF plot. It seems that our data does not lend itself to an auto.arima function when it is in a daily frequency.</p>
+<pre class="r"><code>fit &lt;- auto.arima(aemo_daily_ts, lambda = BoxCox.lambda(aemo_daily_ts))
+
+checkresiduals(fit)</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(3,1,3)
+## Q* = 67251, df = 724, p-value &lt; 2.2e-16
+## 
+## Model df: 6.   Total lags used: 730</code></pre>
+</div>
+<div id="weekly-data-1" class="section level3">
+<h3>Weekly Data</h3>
+<p>Much better.</p>
+<pre class="r"><code>fit2 &lt;- auto.arima(aemo_weekly_ts, lambda = BoxCox.lambda(aemo_weekly_ts))
+
+checkresiduals(fit2)</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from ARIMA(0,1,0)
+## Q* = 338.9, df = 106, p-value &lt; 2.2e-16
+## 
+## Model df: 0.   Total lags used: 106</code></pre>
+</div>
+</div>
+<div id="differencing" class="section level2">
+<h2>Differencing</h2>
+<p>Differencing is the process of de-seasonalizing data. One popular way of testing whether or not data needs differencing is the kpss test - determining that the test-statistic is equal to or lesser than 1%, and that the data does not need differencing (that there is no seasonal component to the data). Here we can see that our result returns a test statistics of greater than 1% and therefore the data <b>does</b> exhibit seasonality, even in weekly observations.</p>
+<pre class="r"><code>library(urca)
+aemo_weekly_ts %&gt;% ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 7 lags. 
+## 
+## Value of test-statistic is: 1.3849 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<p>Let’s difference the data and see what result we get:</p>
+<pre class="r"><code>aemo_weekly_ts %&gt;% diff() %&gt;% ur.kpss() %&gt;% summary()</code></pre>
+<pre><code>## 
+## ####################### 
+## # KPSS Unit Root Test # 
+## ####################### 
+## 
+## Test is of type: mu with 7 lags. 
+## 
+## Value of test-statistic is: 0.0054 
+## 
+## Critical value for a significance level of: 
+##                 10pct  5pct 2.5pct  1pct
+## critical values 0.347 0.463  0.574 0.739</code></pre>
+<p>From the above summary we can see that the differenced dataset produces a t-statistic of less than 1%, and therefore the differenced dataset produces a stationary and therefore more ARIMA-friendly timeseries.</p>
+</div>
+<div id="fitting-auto.arima-to-differenced-data" class="section level2">
+<h2>Fitting auto.arima to differenced data</h2>
+<p>Here we are looking at the strength of one automatically selected model that has been differenced for seasonality; typically industry-standard forecasting would implement an ensemble of forecasts that are enhanced by machine learning algorithms such as extreme gradient boosting. One such example was the feature-based + xgBoost model used by Talaga &amp; Hyndman to take second place at the M4 forecasting competition.</p>
+<pre class="r"><code>weekly_arima_diff &lt;- auto.arima(aemo_weekly_ts, d=1)
+
+accuracy_diff_arima_table &lt;- DT::datatable(accuracy(weekly_arima_diff)) %&gt;%
+  frameWidget(height = &quot;100%&quot;, width = 2400)
+  
+accuracy_diff_arima_table</code></pre>
+<div id="htmlwidget-5" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-13.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="acf-1" class="section level2">
+<h2>ACF</h2>
+<p>After a timeseries has been stationarized by differencing, the next step when fitting an ARIMA model is to determine whether the <b>auto-regressors</b> or the <b>moving average</b> terms are needed to correct any autocorrelation that remains in the differenced series. At it’s core, the ACF plot is a barchart of the coefficients of correlation between a time series, and lags of itself.</p>
+<div id="non-differenced-acf" class="section level3">
+<h3>Non-Differenced ACF</h3>
+<pre class="r"><code>Acf(aemo_weekly_ts)</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+<div id="differenced-acf" class="section level3">
+<h3>Differenced ACF</h3>
+<pre class="r"><code>Acf(diff(aemo_weekly_ts))</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="box-jung-test" class="section level3">
+<h3>Box-Jung Test</h3>
+<p>Box-Jung test on differenced data.</p>
+<pre class="r"><code>Box.test(diff(aemo_weekly_ts), lag=10, type=&quot;Ljung-Box&quot;)</code></pre>
+<pre><code>## 
+##  Box-Ljung test
+## 
+## data:  diff(aemo_weekly_ts)
+## X-squared = 176.49, df = 10, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+<div id="model-performance" class="section level1">
+<h1>Model Performance</h1>
+<p>After some initial exploratory data analysis, we can now proceed to train models and evaluate their accuracy according to standardised measures such as Mean Absolute Standard Error (MASE) and Mean Absolute Percentage Error (MAPE).</p>
+<pre class="r"><code>library(caret)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre class="r"><code>aemo_timeSlices_weekly &lt;- createTimeSlices(1:nrow(aemo_weekly_ts), 
+                   initialWindow = 52, horizon = 12, fixedWindow = TRUE)
+
+trainSlices &lt;- aemo_timeSlices_weekly[[1]]
+testSlices &lt;- aemo_timeSlices_weekly[[2]]</code></pre>
+<p>Plotting the predictions made by observing the moving average term (“mean”), the random walk model (“naive”), the random walk with drift model (“seasonal naive”) and the seasonal trend decomposition model using Loeff (“STLF”).</p>
+<pre class="r"><code>aemo_window_2 &lt;- window(aemo_weekly_ts,start=1999,end=c(2018,4))
+fit1 &lt;- meanf(aemo_window_2,h=52)
+fit2 &lt;- rwf(aemo_window_2,h=52)
+fit3 &lt;- snaive(aemo_window_2,h=52)
+fit4 &lt;- stlf(aemo_window_2, h=52)
+p55 &lt;- autoplot(window(aemo_weekly_ts, start=2016)) +
+  autolayer(fit1, series=&quot;Mean&quot;, PI=FALSE) +
+  autolayer(fit2, series=&quot;Naïve&quot;, PI=FALSE) +
+  autolayer(fit3, series=&quot;Seasonal naïve&quot;, PI=FALSE) +
+  autolayer(fit4, series=&quot;STLF&quot;, PI=FALSE) +
+  xlab(&quot;Year&quot;) + ylab(&quot;Demand&quot;) +
+  ggtitle(&quot;Forecasts for Weekly Energy Demand in NSW&quot;) +
+  guides(colour=guide_legend(title=&quot;Forecast&quot;))
+
+p55</code></pre>
+<p><img src="/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div id="measures-of-success" class="section level2">
+<h2>Measures of Success</h2>
+<div id="mean-absolute-scaled-error" class="section level3">
+<h3>Mean Absolute Scaled Error</h3>
+<p>Mean Absolute Scaled Error is a measure of model accuracy proposed by <a href="http://www.sciencedirect.com/science/article/pii/S0169207006000239">Hyndman and Kohler (2008)</a> predominantly to provide a <a href="https://en.wikipedia.org/wiki/Scale_invariance">scale-invariant</a> measure of model accuracy; avoiding issues of having a “meaningful zero” or a model that preferences values that are close to zero as being more correct.</p>
+<p>The mean absolute scaled error is represented as the following, where MAE is the mean absolute error:</p>
+<p><imc src="https://res.cloudinary.com/dqhgkus9i/image/upload/v1540292966/Screen_Shot_2018-10-23_at_10.07.57_pm.png"></p>
+</div>
+<div id="mean-absolute-percentage-error" class="section level3">
+<h3>Mean Absolute Percentage Error</h3>
+<p>A mean absolute percentage error is a measure of model accuracy that very heavily relies on there being no absolute zero term, as a part of the equation relies on dividing the error term by its observed value, which in some instances (including in the case of energy demand) this value can conceivable take on a zero value. For that reason, I will not be measuring model performance on the mean absolute percentage error but rather on the MASE. Just for consistency here is how you would represent the MAPE:</p>
+<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/4cf2158513b0345211300fe585cc88a05488b451"></p>
+</div>
+</div>
+<div id="auto-arima-mase" class="section level2">
+<h2>Auto Arima MASE</h2>
+<p>Here are the accuracy metrics of a simple <code>auto.arima()</code> model that is partitioned to have a 12 week holdout (predicting on the final 12 weeks of data that the model is not trained on).</p>
+<pre class="r"><code>holdout &lt;- 12
+
+arima_forecasts &lt;- lapply(aemo_weekly_ts, function(foo) {
+    subseries &lt;- ts(head(foo,length(foo)-holdout),start=start(foo),frequency=frequency(foo))
+    forecast(auto.arima(subseries),h=holdout)
+})
+
+auto_arima_accuracy &lt;- accuracy(arima_forecasts$totaldemandweek, aemo_weekly_ts)
+
+auto_arima_accuracy_table &lt;- DT::datatable(auto_arima_accuracy) %&gt;% 
+ frameWidget(height = &quot;100%&quot;, width = 2400)
+
+auto_arima_accuracy_table</code></pre>
+<div id="htmlwidget-6" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-19.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="benchmarking" class="section level2">
+<h2>Benchmarking</h2>
+<p>An automatically generated arima model with no special data treatment or model ensembling is able to achieve a prediction that isn’t half bad. Now, we can compare with a model that is designed to work more closely with data that resembles the AEMO energy demand data - seasonal data.</p>
+<div id="seasonal-naive-bayes" class="section level3">
+<h3>Seasonal Naive Bayes</h3>
+<p>Here we show the same measures of accuracybut this time we observe a seasonal naive model with a holdout of 10 weeks.</p>
+<pre class="r"><code>snaive_forecasts10 &lt;- lapply(aemo_weekly_ts, function(foo) {
+  subseries &lt;- ts(head(foo, length(foo)-10), start = start(foo), frequency = frequency(foo))
+  forecast(rwf(subseries), h=10)
+})
+
+snaive_accuracy_10_weeks &lt;- accuracy(snaive_forecasts10$totaldemandweek, aemo_weekly_ts)</code></pre>
+<div id="htmlwidget-7" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-21.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>The above model delivers hands-down the worst performance of all</p>
+<p>And eight weeks hold out…</p>
+<pre class="r"><code>snaive_forecasts_8_weeks &lt;- lapply(aemo_weekly_ts, function(foo) {
+  subseries &lt;- ts(head(foo, length(foo)-8), start = start(foo), frequency = frequency(foo))
+  forecast(rwf(subseries), h=8)
+})
+
+snaive_accuracy_8_weeks &lt;- accuracy(snaive_forecasts_8_weeks$totaldemandweek, aemo_weekly_ts)</code></pre>
+<div id="htmlwidget-8" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-23.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>Four week holdout…</p>
+<pre class="r"><code>tbats_forecasts_4_weeks &lt;- lapply(aemo_weekly_ts, function(foo) {
+  subseries &lt;- ts(head(foo, length(foo)-4), start = start(foo), frequency = frequency(foo))
+  forecast(tbats(subseries), h=4)
+})
+
+tbats_accuracy_4_weeks &lt;- accuracy(tbats_forecasts_4_weeks$totaldemandweek, aemo_weekly_ts)</code></pre>
+<div id="htmlwidget-9" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-25.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p>And lastly the two week holdout…</p>
+<pre class="r"><code>tbats_forecasts_2_weeks &lt;- lapply(aemo_weekly_ts, function(foo) {
+  subseries &lt;- ts(head(foo, length(foo)-2), start = start(foo), frequency = frequency(foo))
+  forecast(tbats(subseries), h=2)
+})
+
+tbats_accuracy_2_weeks &lt;- accuracy(tbats_forecasts_2_weeks$totaldemandweek, aemo_weekly_ts)</code></pre>
+<div id="htmlwidget-10" style="width:2400px;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-10">{"x":{"url":"/Untitled/2018-10-24-arima-timeseries-forecasting-in-r_files/figure-html//widgets/widget_unnamed-chunk-27.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>aemo_weekly_auto_arima &lt;- auto.arima(aemo_weekly_ts)
+
+aemo_daily_auto_arima &lt;- auto.arima(aemo_daily_ts)
+
+DT::datatable(accuracy(aemo_weekly_auto_arima)) %&gt;% frameWidget(height = &quot;100%&quot;, width = 2400)</code></pre>
+</div>
+</div>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<ul>
+<li>It is tempting to explore the ARIMA model because it offers the tantalizing prospect of being uninfluenced by potentially erroneous variables, and its able to predict future values based off of past values.</li>
+<li>A timeseries statistician using an ARIMA model needs to be prepared to abandon the notion that there are explanatory variables other than time that will predict the value of a dependent variable.</li>
+<li>In the case of AEMO energy demand data, I believe that the answer lies somewhere in the grey area; that while we can achieve a reasonable degree of accuracy (or a reasonable low Mean Absolute Standard Error), I intend to continue exploring these methods and beyond.</li>
+<li>My next exploration of statistical methods will involve looking a possible ways to use an ARIMAX model; essentially an ARIMA model that also factors in multiple explanatory/independent variables alongside the timeseries forecasting of the ARIMA model.</li>
+<li>There is an intuitive and rational logic behind the idea that energy demand is a function of time as well as various other explanatory variables (as we and also Hyndman et al have found, temperature data can play a significant role in energy demand). * An ARIMA model that factors in the linear relationships of independent and dependent variables will achieve a greater level of prediction accuracy than a generalized automatically selected ARIMA model.</li>
+</ul>
+</div>
