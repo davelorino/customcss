@@ -17,10 +17,7 @@
       <pubDate>Sun, 25 Nov 2018 00:00:00 +0000</pubDate>
       
       <guid>/untitled/customizing-google-analytics-css-and-javascript-inside-rmarkdown/</guid>
-      <description>This document explores customers who fit the following criteria:
- came to our website as organic searchers
- clicked on a banner heading at any point during their browse
- placed an order within the same session</description>
+      <description>RMarkdown is the development environment that I use for most of my reporting both at work and for making reproducible workflows. The benefits are limitless; all major programming languages in one document and with the full extensibility of CSS and Javascript to communicate with the features of todays modern web.</description>
     </item>
     
     <item>
