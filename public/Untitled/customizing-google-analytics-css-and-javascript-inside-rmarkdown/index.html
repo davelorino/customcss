@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.45" />
 
 
-<title>Customizing Google Analytics, CSS and Javascript inside RMarkdown - Davide Lorino</title>
-<meta property="og:title" content="Customizing Google Analytics, CSS and Javascript inside RMarkdown - Davide Lorino">
+<title>Google Data Studio, CSS and Javascript inside RMarkdown Documents - Davide Lorino</title>
+<meta property="og:title" content="Google Data Studio, CSS and Javascript inside RMarkdown Documents - Davide Lorino">
 
 
 
@@ -16,6 +16,11 @@
 
 
 
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -55,7 +60,7 @@
   <article class="article">
     
 
-    <h1 class="article-title">Customizing Google Analytics, CSS and Javascript inside RMarkdown</h1>
+    <h1 class="article-title">Google Data Studio, CSS and Javascript inside RMarkdown Documents</h1>
 
     
 
@@ -102,15 +107,37 @@
 
 <p>RMarkdown is the development environment that I use for most of my reporting both at work and for making reproducible workflows. The benefits are limitless; <i>all major programming languages in one document and with the full extensibility of CSS and Javascript to communicate with the features of todays modern web.</i></p>
 <p>This post will explore how we can extend RMarkdown even further, by porting in a report from Google Data Studio, as well as using custom CSS and Javascript to give you more control over of style and reactivity within Rmd documents. Lastly, the whole thing is packaged up and rendered to html for deployment to a blogdown website.</p>
+<p><b>1. Google Data Studio</b></p>
 <iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1gRGJrsWGognR2UpDB2MCBc3labsJCNuC/page/j20c" frameborder="0" style="border:0" allowfullscreen>
 </iframe>
-<p>This document explores customers who fit the following criteria:</p>
-<ul>
-<li><p>came to our website as organic searchers</p></li>
-<li><p>clicked on a banner heading at any point during their browse</p></li>
-<li><p>placed an order within the same session</p></li>
-</ul>
-<p>What we can see is that a significant proportion of these customers who began as organic searches, have been re-defined as having a sales activity other than ‘Web’ (Main Mailing, Recriuitment etc) as a result of having clicked the banner heading.</p>
+<p>Google Data Studio offers an out-of-the-box solution for combining data sources and producing automated dashboards from siloed data repositories. In addition, it offers an advanced set of styling tools that allow you to customize the look-and-feel of your reports to a considerable degree.</p>
+<p>What you may not have noticed from the embedded report above is that those visualizations are fully interactive and each one provides the option to <i>right-click</i> and download the report as a .csv or other. Really extensible, really cool - and it can all be leveraged from within Rmd too.</p>
+<p>To embed a Google Data Studio report into your Rmarkdown document, you first have to make sure that the report and (its data source, that you specify) are both set to ‘Public’ i.e. that you authorize for anybody to see them and download them. This is important, otherwise all anyone else will see is an error message in the middle of your report.</p>
+<p>Lastly, in Google Data Studio select the <code>&lt;&gt;</code> option from the heading to be presented with the necessary html to embed your report - mine html chunk looks like this:</p>
+<pre class="r"><code>&lt;iframe width=&quot;1000&quot; height=&quot;750&quot; src=&quot;https://datastudio.google.com/embed/reporting/1gRGJrsWGognR2UpDB2MCBc3labsJCNuC/page/j20c&quot; frameborder=&quot;0&quot; style=&quot;border:0&quot; allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
+<p><br></br>
+<b>2. Custom CSS</b></p>
+<p>Calling a seperate CSS file from RMarkdown can be done by structuring the <code>toml</code> at the head of the page like so:</p>
+<pre class="r"><code>  output: 
+    html_document:
+      css: name_of_your_css_file.css</code></pre>
+<p>Custom CSS options for Rmarkdown documents look like this:</p>
+<pre class="r"><code>body{
+  font-family: &quot;Courier New&quot;;
+  font-size: 2px;
+  color: #f9f1f1;
+  background-color: #4b5f6d;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #f9f1f1;
+}</code></pre>
+<p>That chunk of CSS covers almost all of the CSS needed to render the styling on this site.</p>
+<p>Once you’re done customizing the CSS, put your CSS file in the same working directory as your .Rmd file - voila! This is handy for things like background colour, font, border widths, all that jazz.</p>
+<p><b>3. Highcharter / Highcharts.js</b></p>
+<p>Highcharter is an excellent wrapper around the Highcharts javascript visualization api. While not a free option for somebody looking to produce rich and robust visualizations, its certainly a small price to pay to avoid the learning curve and developer time necessary to produce even half the results in D3.</p>
+<p>To produce the below visualisations, the Highcharts api is extremely flexible and has all sorts of options for customizing plot graphics - here for instance I have set the font to match identically to the font in this post (even the colour - look at the x-axis in the bar chart, try the tooltip - its the same same font!) as well as set the colors of the area within the plot to a personally selected color palette to match the post.</p>
+<p>Another thing Highcharter offers is the really smooth and responsive tooltip reactivity - try moving the tooltip around the pie chart - really responsive and compares best with D3 only with many less hours invested in scripting a D3 object and converting the data to JSON - holy moly.</p>
 <p><br></br>
 <div id="htmlwidget-1" style="width:100%;height:500px;" class="highchart html-widget"></div>
 <script type="application/json" data-for="htmlwidget-1">{"x":{"hc_opts":{"title":{"text":"<span style =\"color:#f9f1f1\">Organic Searchers Final GMS Segment After Banner Click 2017<\/span>","useHTML":true},"yAxis":{"title":{"text":null}},"credits":{"enabled":false},"exporting":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0},"treemap":{"layoutAlgorithm":"squarified"},"pie":{"dataLabels":{"color":"#f9f1f1"},"size":"250"}},"chart":{"type":"pie","style":{"fontFamily":"courier new"}},"series":[{"data":[{"name":"EM","y":3.55},{"name":"MM","y":0.59},{"name":"RECR","y":50.89},{"name":"RT","y":18.05},{"name":"UP","y":0.3},{"name":"WEB","y":26.63}],"name":"Orders per Channel %"}],"colors":["#77C9D4","#57BC90","#015249","#A5A5AF","#687A8F"]},"theme":{"chart":{"backgroundColor":"transparent"}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":"courier+new","debug":false},"evals":[],"jsHooks":[]}</script>
@@ -143,6 +170,18 @@
 
     </div>
     
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
 
     
 <script src="/js/math-code.js"></script>

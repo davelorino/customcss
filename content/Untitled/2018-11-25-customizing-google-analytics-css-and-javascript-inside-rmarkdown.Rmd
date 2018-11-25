@@ -1,5 +1,5 @@
 ---
-title: Customizing Google Analytics, CSS and Javascript inside RMarkdown
+title: Google Data Studio, CSS and Javascript inside RMarkdown Documents
 author: Davide Lorino
 date: '2018-11-25'
 slug: customizing-google-analytics-css-and-javascript-inside-rmarkdown
@@ -19,17 +19,58 @@ RMarkdown is the development environment that I use for most of my reporting bot
 
 This post will explore how we can extend RMarkdown even further, by porting in a report from Google Data Studio, as well as using custom CSS and Javascript to give you more control over of style and reactivity within Rmd documents. Lastly, the whole thing is packaged up and rendered to html for deployment to a blogdown website.  
 
+  <b>1. Google Data Studio</b> 
+
 <iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1gRGJrsWGognR2UpDB2MCBc3labsJCNuC/page/j20c" frameborder="0" style="border:0" allowfullscreen></iframe>
 
-This document explores customers who fit the following criteria:
+Google Data Studio offers an out-of-the-box solution for combining data sources and producing automated dashboards from siloed data repositories. In addition, it offers an advanced set of styling tools that allow you to customize the look-and-feel of your reports to a considerable degree. 
 
-  * came to our website as organic searchers
-    
-  * clicked on a banner heading at any point during their browse
-    
-  * placed an order within the same session
+What you may not have noticed from the embedded report above is that those visualizations are fully interactive and each one provides the option to <i>right-click</i> and download the report as a .csv or other. Really extensible, really cool - and it can all be leveraged from within Rmd too.
 
-What we can see is that a significant proportion of these customers who began as organic searches, have been re-defined as having a sales activity other than 'Web' (Main Mailing, Recriuitment etc) as a result of having clicked the banner heading.
+To embed a Google Data Studio report into your Rmarkdown document, you first have to make sure that the report and (its data source, that you specify) are both set to 'Public' i.e. that you authorize for anybody to see them and download them. This is important, otherwise all anyone else will see is an error message in the middle of your report. 
+
+Lastly, in Google Data Studio select the ```<>``` option from the heading to be presented with the necessary html to embed your report - mine html chunk looks like this:
+
+```{r eval = FALSE}
+<iframe width="1000" height="750" src="https://datastudio.google.com/embed/reporting/1gRGJrsWGognR2UpDB2MCBc3labsJCNuC/page/j20c" frameborder="0" style="border:0" allowfullscreen></iframe>
+```
+<br></br>
+  <b>2. Custom CSS</b>
+  
+  Calling a seperate CSS file from RMarkdown can be done by structuring the ```toml``` at the head of the page like so:
+  
+```{r eval = FALSE} 
+  output: 
+    html_document:
+      css: name_of_your_css_file.css
+```
+
+Custom CSS options for Rmarkdown documents look like this:
+
+```{r eval = FALSE}
+body{
+  font-family: "Courier New";
+  font-size: 2px;
+  color: #f9f1f1;
+  background-color: #4b5f6d;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #f9f1f1;
+}
+```
+
+That chunk of CSS covers almost all of the CSS needed to render the styling on this site.
+
+Once you're done customizing the CSS, put your CSS file in the same working directory as your .Rmd file - voila! This is handy for things like background colour, font, border widths, all that jazz.
+
+  <b>3. Highcharter / Highcharts.js</b>
+
+Highcharter is an excellent wrapper around the Highcharts javascript visualization api. While not a free option for somebody looking to produce rich and robust visualizations, its certainly a small price to pay to avoid the learning curve and developer time necessary to produce even half the results in D3. 
+
+To produce the below visualisations, the Highcharts api is extremely flexible and has all sorts of options for customizing plot graphics - here for instance I have set the font to match identically to the font in this post (even the colour - look at the x-axis in the bar chart, try the tooltip - its the same same font!) as well as set the colors of the area within the plot to a personally selected color palette to match the post.
+
+Another thing Highcharter offers is the really smooth and responsive tooltip reactivity - try moving the tooltip around the pie chart - really responsive and compares best with D3 only with many less hours invested in scripting a D3 object and converting the data to JSON - holy moly.  
 
 ```{r echo = FALSE, message = FALSE}
 library(tidyverse)
